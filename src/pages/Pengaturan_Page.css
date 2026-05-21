@@ -1,0 +1,159 @@
+/* ═══════════════════════════════════════════════════════════════
+   Pengaturan_Page.css — Premium Settings Page Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+.set-content-wrapper {
+  max-width: 1200px;
+  margin: 0;
+  padding: 24px 28px;
+}
+
+.set-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.set-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.set-card {
+  padding: 24px 26px !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #f1f3f7;
+}
+
+/* Profile section inside card */
+.set-profile-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+}
+
+.set-avatar-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #1a56db;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dbeafe;
+}
+
+.set-profile-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.set-profile-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.set-profile-desc {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Fields list in setting rows */
+.set-fields-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.set-field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.set-field-row:last-child {
+  border-bottom: none;
+}
+
+.set-field-label {
+  font-size: 13.5px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.set-field-val {
+  font-size: 13.5px;
+  color: #1e293b;
+}
+
+.set-field-val.font-semibold {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.set-field-link {
+  color: #1a56db;
+  font-weight: 500;
+}
+
+/* Badges */
+.set-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.set-badge-blue {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #dbeafe;
+}
+
+.set-badge-green {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+/* Action button for Edit Profil */
+.set-action-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 7px 18px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  margin-top: 18px;
+}
+
+.set-action-btn:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+/* Responsive grid layout */
+@media (max-width: 1024px) {
+  .set-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}

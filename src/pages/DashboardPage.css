@@ -1,0 +1,540 @@
+/* ═══════════════════════════════════════════════════════════════
+   DashboardPage.css  —  SNBP Monitor Academic Dashboard
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Shell / Layout ─────────────────────────────────────────────── */
+.db-shell {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f6fa;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #1e293b;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────────── */
+.db-sidebar {
+  width: 210px;
+  min-width: 210px;
+  background: #ffffff;
+  border-right: 1px solid #e8eaf0;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.db-sidebar-brand {
+  padding: 22px 20px 18px;
+  border-bottom: 1px solid #f1f3f7;
+}
+
+.db-brand-title {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a56db;
+  letter-spacing: -0.2px;
+}
+
+.db-brand-sub {
+  display: block;
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+/* nav */
+.db-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0 20px;
+  gap: 4px;
+  flex: 1;
+}
+
+.db-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-bottom: 8px;
+}
+
+.db-nav-group-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  color: #94a3b8;
+  padding: 6px 20px 4px;
+  text-transform: uppercase;
+}
+
+.db-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #64748b;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+  width: 100%;
+}
+
+.db-nav-item:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.db-nav-item.active {
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
+  border-left: 3px solid #1d4ed8;
+  padding-left: 17px;
+}
+
+.db-nav-icon {
+  font-size: 15px;
+  width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ── Main area ──────────────────────────────────────────────────── */
+.db-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ── Topbar ─────────────────────────────────────────────────────── */
+.db-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border-bottom: 1px solid #e8eaf0;
+  padding: 14px 28px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.db-topbar-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.db-page-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.db-page-sub {
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+.db-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.db-profile-info {
+  text-align: right;
+}
+
+.db-profile-name {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.db-profile-role {
+  display: block;
+  font-size: 11.5px;
+  color: #64748b;
+}
+
+.db-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #1d4ed8;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Content ────────────────────────────────────────────────────── */
+.db-content {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Stat cards ─────────────────────────────────────────────────── */
+.db-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.db-stat-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid #f1f3f7;
+}
+
+.db-stat-label {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.db-stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+
+.db-stat-sub {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ── Shared card ────────────────────────────────────────────────── */
+.db-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 22px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f1f3f7;
+}
+
+.db-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.db-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* ── Badges ─────────────────────────────────────────────────────── */
+.db-badge {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.db-badge-blue {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.db-badge-red {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.db-badge-red-outline {
+  background: transparent;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+/* ── Middle row ─────────────────────────────────────────────────── */
+.db-mid-row {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 16px;
+}
+
+/* ── Status buckets ─────────────────────────────────────────────── */
+.db-status-buckets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.db-bucket {
+  border-radius: 10px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.db-bucket-green  { background: #f0fdf4; }
+.db-bucket-orange { background: #fff7ed; }
+.db-bucket-red    { background: #fff1f2; }
+
+.db-bucket-num {
+  font-size: 26px;
+  font-weight: 700;
+}
+.db-bucket-green  .db-bucket-num { color: #16a34a; }
+.db-bucket-orange .db-bucket-num { color: #ea580c; }
+.db-bucket-red    .db-bucket-num { color: #dc2626; }
+
+.db-bucket-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+/* ── Progress bars ──────────────────────────────────────────────── */
+.db-progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.db-progress-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 24px;
+  align-items: center;
+  gap: 10px;
+}
+
+.db-progress-label {
+  font-size: 13px;
+  color: #475569;
+}
+
+.db-progress-track {
+  height: 8px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.db-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.db-progress-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  text-align: right;
+}
+
+/* ── Notifications ──────────────────────────────────────────────── */
+.db-notif-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.db-notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.db-notif-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.db-notif-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.db-notif-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.db-notif-title {
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.db-notif-time {
+  font-size: 11.5px;
+  color: #94a3b8;
+}
+
+/* ── Risk table ─────────────────────────────────────────────────── */
+.db-risk-table-card {
+  width: 100%;
+}
+
+.db-table-wrapper {
+  overflow-x: auto;
+}
+
+.db-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.db-table thead tr {
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.db-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.db-table tbody tr {
+  border-bottom: 1px solid #f8fafc;
+  transition: background 0.12s;
+}
+
+.db-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.db-table td {
+  padding: 13px 14px;
+  color: #1e293b;
+}
+
+.db-td-name {
+  font-weight: 600;
+  color: #0f172a !important;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* status badges inside table */
+.db-status-badge {
+  display: inline-block;
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.db-status-berisiko {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.db-status-perhatian {
+  background: #fff7ed;
+  color: #ea580c;
+  border: 1px solid #fed7aa;
+}
+
+.db-status-siap {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .db-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .db-mid-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .db-sidebar {
+    display: none;
+  }
+  .db-stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .db-content {
+    padding: 16px;
+  }
+  .db-topbar {
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .db-stat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Sidebar Bottom ────────────────────────────────────────────── */
+.db-sidebar-bottom {
+  margin-top: auto;
+  border-top: 1px solid #f1f3f7;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.db-nav-logout {
+  color: #dc2626 !important;
+}
+
+.db-nav-logout:hover {
+  background: #fef2f2 !important;
+  color: #b91c1c !important;
+}
