@@ -1,0 +1,149 @@
+/* ═══════════════════════════════════════════════════════════════
+   EksporData_Page.css — Export Data Page Premium Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+.ekspor-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Grid adjustment ────────────────────────────────────────────── */
+.ekspor-grid-row {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* ── Left column options ───────────────────────────────────────── */
+.ekspor-options-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ekspor-opt-card {
+  padding: 20px 24px !important;
+}
+
+.ekspor-opt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.ekspor-opt-title {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.ekspor-opt-desc {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 8px 0 16px 0;
+}
+
+/* Format Badges */
+.ekspor-fmt-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.ekspor-fmt-badge.fmt-pdf {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #dbeafe;
+}
+
+.ekspor-fmt-badge.fmt-excel {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #dcfce7;
+}
+
+.ekspor-fmt-badge.fmt-csv {
+  background: #f8fafc;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+/* Action button */
+.ekspor-action-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 7px 18px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.ekspor-action-btn:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.ekspor-action-btn .arrow-icon {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* ── Right column history ──────────────────────────────────────── */
+.ekspor-history-card {
+  height: fit-content;
+}
+
+.ekspor-history-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ekspor-history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.ekspor-history-row:last-child {
+  border-bottom: none;
+}
+
+.ekspor-history-name {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.ekspor-history-footer {
+  margin-top: 20px;
+  font-size: 11.5px;
+  color: #94a3b8;
+  font-weight: 500;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 12px;
+}
+
+/* Responsive grid layout */
+@media (max-width: 1024px) {
+  .ekspor-grid-row {
+    grid-template-columns: 1fr;
+  }
+}
