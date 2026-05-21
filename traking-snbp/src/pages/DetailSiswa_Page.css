@@ -1,0 +1,221 @@
+/* ═══════════════════════════════════════════════════════════════
+   DetailSiswa_Page.css — Student Details Page Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+.detail-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Student Header Card ────────────────────────────────────────── */
+.student-detail-header-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f1f3f7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sdh-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sdh-avatar-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fef2f2; /* Light red/coral theme for "Berisiko" */
+  color: #dc2626;
+  font-size: 19px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fee2e2;
+}
+
+.sdh-info h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px;
+  letter-spacing: -0.3px;
+}
+
+.sdh-info p {
+  font-size: 13.5px;
+  color: #64748b;
+  margin: 0 0 10px;
+}
+
+.sdh-badges {
+  display: flex;
+  gap: 8px;
+}
+
+.sdh-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+
+.sdh-badge.badge-risk {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fee2e2;
+}
+
+.sdh-badge.badge-score {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #dbeafe;
+}
+
+.sdh-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: right;
+}
+
+.sdh-pred-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sdh-pred-val {
+  font-size: 34px;
+  font-weight: 700;
+  color: #ef4444;
+  line-height: 1.1;
+  margin: 2px 0 4px;
+  letter-spacing: -0.5px;
+}
+
+.sdh-pred-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fee2e2;
+}
+
+/* ── Grid adjustment ────────────────────────────────────────────── */
+.detail-grid-row {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 16px;
+}
+
+/* ── Left Card: Subjects ───────────────────────────────────────── */
+.detail-subjects-card {
+  height: fit-content;
+}
+
+.detail-progress-list {
+  gap: 18px !important;
+}
+
+.detail-progress-row {
+  grid-template-columns: 140px 1fr 28px !important;
+}
+
+.detail-subj-name {
+  font-size: 13.5px !important;
+  color: #334155 !important;
+  font-weight: 500 !important;
+}
+
+.detail-subj-score {
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+}
+
+/* ── Right Cards Stack ─────────────────────────────────────────── */
+.detail-right-stack {
+  width: 100%;
+}
+
+/* Stats list styling */
+.detail-stats-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10.5px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13.5px;
+}
+
+.ds-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.ds-val {
+  color: #0f172a;
+}
+
+/* Teacher action buttons */
+.detail-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.teacher-action-btn {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px; /* Rounded pill style like screenshot */
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #334155;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.teacher-action-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+.tab-arrow {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.teacher-action-btn:hover .tab-arrow {
+  color: #64748b;
+}
+
+/* Responsive details layout */
+@media (max-width: 1024px) {
+  .detail-grid-row {
+    grid-template-columns: 1fr;
+  }
+}
