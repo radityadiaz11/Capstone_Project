@@ -1,0 +1,315 @@
+/* ============================================
+   PesanGuru_Page.css
+   Standalone CSS for PesanGuru_Page.jsx
+   ============================================ */
+
+/* --- Page Shell --- */
+.pg-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f3ef;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #334155;
+  box-sizing: border-box;
+}
+
+/* --- Mobile Header --- */
+.pg-mobile-header { display: none; }
+
+/* --- Sidebar --- */
+.pg-sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid rgba(229, 231, 235, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.pg-brand { margin-bottom: 24px; }
+.pg-brand-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+.pg-brand-sub {
+  font-size: 10px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin: 2px 0 0 0;
+}
+
+.pg-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #e6f2f2;
+  color: #0D7A7A;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid #bde0e0;
+  margin-top: 12px;
+  margin-bottom: 32px;
+}
+.pg-role-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #0D7A7A;
+}
+
+.pg-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+.pg-nav-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+.pg-nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  background: transparent;
+  color: #475569;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+  box-sizing: border-box;
+}
+.pg-nav-item:hover { background-color: #f8fafc; color: #0f172a; }
+.pg-nav-item.active { background-color: #eff5fb; color: #185FA5; }
+.pg-nav-icon { font-size: 16px; display: inline-flex; align-items: center; }
+
+.pg-sidebar-bottom {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pg-notif-badge {
+  background-color: #A32D2D;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  margin-left: auto;
+}
+.pg-nav-logout { color: #dc2626; }
+.pg-nav-logout:hover { background-color: #fef2f2; color: #b91c1c; }
+
+/* --- Main Content --- */
+.pg-main {
+  flex-grow: 1;
+  margin-left: 240px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* --- Topbar --- */
+.pg-topbar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(245, 243, 239, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 90;
+  padding: 20px 32px;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+.pg-page-info { display: flex; flex-direction: column; }
+.pg-page-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+.pg-page-sub {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin: 2px 0 0;
+}
+.pg-profile-info { display: flex; align-items: center; gap: 12px; }
+.pg-profile-text { display: flex; flex-direction: column; text-align: right; }
+.pg-profile-name { font-weight: 800; font-size: 14px; color: #1e293b; line-height: 1; margin-bottom: 4px; }
+.pg-profile-role { font-size: 10px; color: #94a3b8; font-weight: 700; }
+.pg-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eff5fb;
+  color: #185FA5;
+  font-weight: 800;
+  font-size: 14px;
+  border: 1px solid #d2e2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Content Area --- */
+.pg-content {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1000px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- Message Card --- */
+.pg-msg-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
+}
+
+/* Card Top Row: avatar + sender info + badge */
+.pg-msg-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.pg-msg-sender-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Sender avatar circle */
+.pg-sender-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #e0eaf7;
+  color: #185FA5;
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid #c8d9f0;
+}
+
+.pg-sender-info { display: flex; flex-direction: column; gap: 2px; }
+.pg-sender-name { font-size: 14px; font-weight: 800; color: #1e293b; }
+.pg-sender-meta { font-size: 11px; color: #94a3b8; font-weight: 600; }
+
+/* Message body */
+.pg-msg-greeting {
+  font-size: 13px;
+  font-weight: 700;
+  color: #185FA5;
+  margin-bottom: 8px;
+}
+
+.pg-msg-body {
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  line-height: 1.65;
+}
+
+.pg-msg-body strong { font-weight: 700; color: #1e293b; }
+.pg-msg-body a, .pg-msg-body .link { color: #185FA5; font-weight: 700; text-decoration: none; }
+
+/* Type Badges */
+.pg-badge {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.pg-badge.penting {
+  background-color: #fdf2f2;
+  color: #A32D2D;
+  border: 1px solid #fde8e8;
+}
+.pg-badge.informasi {
+  background-color: #fff8ed;
+  color: #b45309;
+  border: 1px solid #fde8c0;
+}
+.pg-badge.snbp {
+  background-color: #eff5fb;
+  color: #185FA5;
+  border: 1px solid #d2e2f2;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .pg-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 110;
+    box-sizing: border-box;
+  }
+  .pg-mobile-brand { display: flex; flex-direction: column; }
+  .pg-mobile-brand-title { font-size: 16px; font-weight: 800; color: #0f172a; margin: 0; }
+  .pg-mobile-brand-sub { font-size: 9px; color: #94a3b8; font-weight: 600; }
+  .pg-mobile-toggle { background: transparent; border: none; cursor: pointer; color: #475569; padding: 4px; }
+
+  .pg-sidebar {
+    width: 100%;
+    height: calc(100vh - 58px);
+    top: 58px;
+    border-right: none;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease-in-out;
+  }
+  .pg-sidebar.open { transform: translateX(0); }
+  .pg-main { margin-left: 0; }
+  .pg-topbar { padding: 16px 24px; }
+  .pg-content { padding: 20px; }
+  .pg-msg-top { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
