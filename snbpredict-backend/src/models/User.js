@@ -20,14 +20,14 @@ const User = sequelize.define('User', {
     type:      DataTypes.STRING(255),
     allowNull: false
   },
-  role: {
+role: {
     type:         DataTypes.STRING(20),
     allowNull:    false,
-    defaultValue: 'siswa',
+    defaultValue: 'guru',
     validate: {
-      isIn: [['siswa', 'guru', 'orang_tua']]
+      isIn: [['admin', 'guru', 'orang_tua']]
     }
-  }
+}
 }, {
   tableName:   'users',
   timestamps:  true,
