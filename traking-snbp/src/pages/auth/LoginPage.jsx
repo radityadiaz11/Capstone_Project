@@ -3,7 +3,8 @@ import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
-    const [email, setEmail] = useState('');
+    const [role, setRole] = useState('guru'); // 'guru' or 'ortu'
+    const [email, setEmail] = useState('sari.rahayu@sman1yk.sch.id');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('Email atau password salah. Silakan coba lagi.');
     const [showError, setShowError] = useState(true);
@@ -12,7 +13,11 @@ export default function LoginPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Handle login logic here
-        navigate('/dashboard');
+        if (role === 'ortu') {
+            navigate('/ortu/dashboard');
+        } else {
+            navigate('/dashboard');
+        }
     };
 
     return (
@@ -27,6 +32,30 @@ export default function LoginPage() {
             <div className="login-card">
                 <h2 className="login-card-title">Masuk ke akun Anda</h2>
 
+                {/* Role Tabs */}
+                <div className="role-tabs" style={{ marginBottom: '20px' }}>
+                    <button
+                        type="button"
+                        className={`role-tab ${role === 'guru' ? 'active' : ''}`}
+                        onClick={() => {
+                            setRole('guru');
+                            setEmail('sari.rahayu@sman1yk.sch.id');
+                        }}
+                    >
+                        Guru
+                    </button>
+                    <button
+                        type="button"
+                        className={`role-tab ${role === 'ortu' ? 'active' : ''}`}
+                        onClick={() => {
+                            setRole('ortu');
+                            setEmail('hidayat@gmail.com');
+                        }}
+                    >
+                        Orang Tua
+                    </button>
+                </div>
+
                 <form onSubmit={handleSubmit} className="login-form">
                     <div className="form-group">
                         <label htmlFor="email" className="form-label">Email</label>
@@ -34,7 +63,7 @@ export default function LoginPage() {
                             id="email"
                             type="email"
                             className="form-input"
-                            placeholder="sari.rahayu@sman1yk.sch.id"
+                            placeholder={role === 'ortu' ? 'hidayat@gmail.com' : 'sari.rahayu@sman1yk.sch.id'}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             autoComplete="email"
