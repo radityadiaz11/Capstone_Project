@@ -11,8 +11,16 @@ export default function LoginPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle login logic here
-        navigate('/dashboard');
+
+        if (email === 'guru@snbp.com' && password === '123456') {
+            navigate('/dashboard');
+        } else if (email === 'ortu@snbp.com' && password === '123456') {
+            navigate('/ortu/dashboard');
+        } else if (email === 'admin@snbp.com' && password === '123456') {
+            navigate('/admin/dashboard');
+        } else {
+            setShowError(true);
+        }
     };
 
     return (

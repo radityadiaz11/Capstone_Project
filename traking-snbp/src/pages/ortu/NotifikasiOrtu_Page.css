@@ -1,0 +1,468 @@
+/* ============================================
+   NotifikasiOrtu_Page.css
+   Standalone CSS for NotifikasiOrtu_Page.jsx
+   ============================================ */
+
+/* --- Page Shell Wrapper --- */
+.no-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background-color: #f5f3ef;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #334155;
+  box-sizing: border-box;
+}
+
+/* --- Mobile Header --- */
+.no-mobile-header {
+  display: none;
+}
+
+/* --- Sidebar --- */
+.no-sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid rgba(229, 231, 235, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  z-index: 100;
+  transition: transform 0.2s ease-in-out;
+}
+
+.no-brand {
+  margin-bottom: 24px;
+}
+
+.no-brand-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.no-brand-sub {
+  font-size: 10px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin: 2px 0 0 0;
+}
+
+/* Role Badge - Teal #0D7A7A */
+.no-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #e6f2f2;
+  color: #0D7A7A;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid #bde0e0;
+  margin-top: 12px;
+  margin-bottom: 32px;
+}
+
+.no-role-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #0D7A7A;
+}
+
+/* Sidebar Navigation */
+.no-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.no-nav-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.no-nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  background: transparent;
+  color: #475569;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+  box-sizing: border-box;
+  border-left: 4px solid transparent;
+}
+
+.no-nav-item:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* Active State Blue #185FA5 with vertical indicator bar */
+.no-nav-item.active {
+  background-color: #eff5fb;
+  color: #185FA5;
+  border-left: 4px solid #185FA5;
+  border-radius: 0 12px 12px 0;
+}
+
+.no-nav-icon {
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sidebar Bottom Area */
+.no-sidebar-bottom {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Red Notification Badge #A32D2D */
+.no-notif-badge {
+  background-color: #A32D2D;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  margin-left: auto;
+}
+
+.no-nav-logout {
+  color: #dc2626;
+}
+
+.no-nav-logout:hover {
+  background-color: #fef2f2;
+  color: #b91c1c;
+}
+
+/* --- Main content pane --- */
+.no-main {
+  flex-grow: 1;
+  margin-left: 240px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* --- Sticky Topbar --- */
+.no-topbar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(245, 243, 239, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 90;
+  padding: 20px 32px;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.no-page-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-page-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.no-page-sub {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin: 2px 0 0 0;
+}
+
+/* User profile section */
+.no-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.no-profile-text {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.no-profile-name {
+  font-weight: 800;
+  font-size: 14px;
+  color: #1e293b;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.no-profile-role {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.no-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eff5fb;
+  color: #185FA5;
+  font-weight: 800;
+  font-size: 14px;
+  border: 1px solid #d2e2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* --- Content Container --- */
+.no-content {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+}
+
+.no-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* --- Notification Cards --- */
+.no-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.015);
+  box-sizing: border-box;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.no-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.025);
+}
+
+/* Card type borders and background highlights */
+.no-card-remedial {
+  border: 1px solid #fee2e2;
+  background-color: #fffbfa;
+}
+.no-card-remedial:hover {
+  border-color: #fca5a5;
+}
+
+.no-card-warning {
+  border: 1px solid #fef3c7;
+  background-color: #fffdf5;
+}
+.no-card-warning:hover {
+  border-color: #fde047;
+}
+
+.no-card-success {
+  border: 1px solid #dcfce7;
+  background-color: #fcfdf9;
+}
+.no-card-success:hover {
+  border-color: #86efac;
+}
+
+/* Icon Wrappers */
+.no-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.no-icon {
+  font-size: 18px;
+}
+
+/* Icon colors and bg */
+.no-icon-wrapper-remedial {
+  background-color: #fdf2f2;
+}
+.no-icon-wrapper-remedial .no-icon {
+  color: #A32D2D;
+}
+
+.no-icon-wrapper-warning {
+  background-color: #eff5fb;
+}
+.no-icon-wrapper-warning .no-icon {
+  color: #185FA5;
+}
+
+.no-icon-wrapper-presence {
+  background-color: #fdf2f2;
+}
+
+.no-icon-wrapper-message {
+  background-color: #eff5fb;
+}
+
+.no-icon-wrapper-success {
+  background-color: #e6f2f2;
+}
+.no-icon-wrapper-success .no-icon {
+  color: #0D7A7A;
+}
+
+/* Text Body */
+.no-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.no-message {
+  font-size: 14px;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.no-message.bold {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.no-time {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* --- Responsive Media Queries --- */
+@media (max-width: 768px) {
+  .no-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 110;
+  }
+
+  .no-mobile-brand-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .no-mobile-brand-sub {
+    font-size: 9px;
+    color: #94a3b8;
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  .no-mobile-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #475569;
+    padding: 4px;
+  }
+
+  .no-sidebar {
+    width: 100%;
+    height: calc(100vh - 58px);
+    top: 58px;
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+    transform: translateX(-100%);
+    padding: 20px;
+  }
+
+  .no-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .no-main {
+    margin-left: 0;
+  }
+
+  .no-topbar {
+    padding: 16px 24px;
+  }
+
+  .no-content {
+    padding: 24px;
+  }
+
+  .no-card {
+    padding: 16px 20px;
+    gap: 16px;
+  }
+
+  .no-icon-wrapper {
+    width: 38px;
+    height: 38px;
+  }
+
+  .no-icon {
+    font-size: 16px;
+  }
+
+  .no-message {
+    font-size: 13px;
+  }
+}
