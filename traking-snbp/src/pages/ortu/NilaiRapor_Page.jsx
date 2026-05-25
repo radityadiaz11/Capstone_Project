@@ -91,7 +91,7 @@ function NilaiRapor_Page() {
             </button>
 
             <button
-              onClick={() => { navigate('/ortu/dashboard'); setIsMobileMenuOpen(false); }}
+              onClick={() => { navigate('/ortu/prediksi-snbp'); setIsMobileMenuOpen(false); }}
               className="nr-nav-item"
             >
               <span className="nr-nav-icon">◎</span>
@@ -99,7 +99,7 @@ function NilaiRapor_Page() {
             </button>
 
             <button
-              onClick={() => { navigate('/ortu/dashboard'); setIsMobileMenuOpen(false); }}
+              onClick={() => { navigate('/ortu/pesan-guru'); setIsMobileMenuOpen(false); }}
               className="nr-nav-item"
             >
               <span className="nr-nav-icon">✉</span>
@@ -111,7 +111,7 @@ function NilaiRapor_Page() {
         {/* Sidebar Bottom */}
         <div className="nr-sidebar-bottom">
           <button
-            onClick={() => { navigate('/ortu/dashboard'); setIsMobileMenuOpen(false); }}
+            onClick={() => { navigate('/ortu/notifikasi'); setIsMobileMenuOpen(false); }}
             className="nr-nav-item"
           >
             <span className="nr-nav-icon">🔔</span>
@@ -120,7 +120,7 @@ function NilaiRapor_Page() {
           </button>
 
           <button
-            onClick={() => { navigate('/ortu/dashboard'); setIsMobileMenuOpen(false); }}
+            onClick={() => { navigate('/ortu/pengaturan'); setIsMobileMenuOpen(false); }}
             className="nr-nav-item"
           >
             <span className="nr-nav-icon">⚙</span>

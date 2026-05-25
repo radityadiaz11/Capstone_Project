@@ -124,7 +124,7 @@ function PesanGuru_Page() {
         <div className="pg-sidebar-bottom">
           <button
             className="pg-nav-item"
-            onClick={() => { navigate('/ortu/dashboard'); setIsMobileMenuOpen(false); }}
+            onClick={() => { navigate('/ortu/notifikasi'); setIsMobileMenuOpen(false); }}
           >
             <span className="pg-nav-icon">🔔</span>
             <span>Notifikasi</span>
@@ -133,7 +133,7 @@ function PesanGuru_Page() {
 
           <button
             className="pg-nav-item"
-            onClick={() => { navigate('/ortu/dashboard'); setIsMobileMenuOpen(false); }}
+            onClick={() => { navigate('/ortu/pengaturan'); setIsMobileMenuOpen(false); }}
           >
             <span className="pg-nav-icon">⚙</span>
             <span>Pengaturan</span>

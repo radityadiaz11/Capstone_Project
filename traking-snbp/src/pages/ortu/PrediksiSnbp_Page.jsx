@@ -114,7 +114,7 @@ function PrediksiSnbp_Page() {
 
                         <button
                             className="ps-nav-item"
-                            onClick={() => { navigate('/ortu/dashboard'); setIsMobileMenuOpen(false); }}
+                            onClick={() => { navigate('/ortu/pesan-guru'); setIsMobileMenuOpen(false); }}
                         >
                             <span className="ps-nav-icon">✉</span>
                             <span>Pesan Guru</span>
@@ -125,7 +125,7 @@ function PrediksiSnbp_Page() {
                 <div className="ps-sidebar-bottom">
                     <button
                         className="ps-nav-item"
-                        onClick={() => { navigate('/ortu/dashboard'); setIsMobileMenuOpen(false); }}
+                        onClick={() => { navigate('/ortu/notifikasi'); setIsMobileMenuOpen(false); }}
                     >
                         <span className="ps-nav-icon">🔔</span>
                         <span>Notifikasi</span>
@@ -134,7 +134,7 @@ function PrediksiSnbp_Page() {
 
                     <button
                         className="ps-nav-item"
-                        onClick={() => { navigate('/ortu/dashboard'); setIsMobileMenuOpen(false); }}
+                        onClick={() => { navigate('/ortu/pengaturan'); setIsMobileMenuOpen(false); }}
                     >
                         <span className="ps-nav-icon">⚙</span>
                         <span>Pengaturan</span>

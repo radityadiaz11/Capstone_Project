@@ -102,7 +102,7 @@ function DashboardOrtu_Page() {
                 {/* Sidebar Bottom Area */}
                 <div className="db-ortu-sidebar-bottom">
                     <button
-                        onClick={() => { setActiveTab('notifikasi'); setIsMobileMenuOpen(false); }}
+                        onClick={() => { navigate('/ortu/notifikasi'); setIsMobileMenuOpen(false); }}
                         className={`db-ortu-nav-item ${activeTab === 'notifikasi' ? 'active' : ''}`}
                     >
                         <span className="db-ortu-nav-icon">🔔</span>
@@ -112,7 +112,7 @@ function DashboardOrtu_Page() {
                     </button>
 
                     <button
-                        onClick={() => { setActiveTab('pengaturan'); setIsMobileMenuOpen(false); }}
+                        onClick={() => { navigate('/ortu/pengaturan'); setIsMobileMenuOpen(false); }}
                         className={`db-ortu-nav-item ${activeTab === 'pengaturan' ? 'active' : ''}`}
                     >
                         <span className="db-ortu-nav-icon">⚙</span>
@@ -268,7 +268,7 @@ function DashboardOrtu_Page() {
                                 </div>
 
                                 <button
-                                    onClick={() => setActiveTab('pesan')}
+                                    onClick={() => navigate('/ortu/pesan-guru')}
                                     className="db-ortu-action-btn"
                                 >
                                     Lihat semua pesan ↗

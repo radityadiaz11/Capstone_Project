@@ -1,0 +1,230 @@
+/* ===================================================
+   PENGATURAN ADMIN PAGE — ADMIN / KEPSEK
+   Inherits sidebar styles from DashboardSekolah_Page.css
+   =================================================== */
+
+@import './DashboardSekolah_Page.css';
+
+/* --- Page Shell --- */
+.pga-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background-color: #f5f6fa;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #334155;
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   MAIN WRAPPER
+   =================================================== */
+.pga-main {
+  flex-grow: 1;
+  margin-left: 220px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   CONTENT AREA
+   =================================================== */
+.pga-content {
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   GRID — Left (profil) + Right (info sistem)
+   =================================================== */
+.pga-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+  max-width: 900px;
+}
+
+/* ===================================================
+   SHARED CARD
+   =================================================== */
+.pga-card {
+  background-color: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.pga-card-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 20px 0;
+}
+
+/* ===================================================
+   PROFIL HEAD
+   =================================================== */
+.pga-profile-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.pga-avatar-lg {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #ede9fe;
+  color: #6d28d9;
+  font-weight: 800;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid #ddd6fe;
+}
+
+.pga-profile-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 3px 0;
+}
+
+.pga-profile-role {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ===================================================
+   INFO ROWS
+   =================================================== */
+.pga-info-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.pga-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px solid #f1f5f9;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.pga-info-row:last-child {
+  border-bottom: none;
+}
+
+.pga-info-label {
+  font-weight: 500;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.pga-info-val {
+  font-weight: 600;
+  color: #334155;
+  text-align: right;
+}
+
+/* Value variants */
+.pga-val-bold {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.pga-val-link {
+  color: #185FA5;
+  font-weight: 600;
+}
+
+.pga-val-green {
+  background-color: #e6f4ea;
+  color: #16a34a;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1px solid #bbf7d0;
+}
+
+/* Super Admin Badge */
+.pga-badge-superadmin {
+  background-color: #ede9fe;
+  color: #6d28d9;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px solid #ddd6fe;
+  white-space: nowrap;
+}
+
+/* ===================================================
+   EDIT BUTTON
+   =================================================== */
+.pga-edit-btn {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.pga-edit-btn:hover {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ===================================================
+   RESPONSIVE — Tablet ≤ 900px
+   =================================================== */
+@media (max-width: 900px) {
+  .pga-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+}
+
+/* ===================================================
+   RESPONSIVE — Mobile ≤ 768px
+   =================================================== */
+@media (max-width: 768px) {
+  .pga-main {
+    margin-left: 0;
+  }
+
+  .pga-content {
+    padding: 20px;
+  }
+
+  .pga-card {
+    padding: 18px;
+  }
+
+  .pga-profile-name {
+    font-size: 14px;
+  }
+}
