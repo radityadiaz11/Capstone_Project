@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
+import api from '../../api/axios';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -8,18 +9,31 @@ export default function LoginPage() {
     const [error, setError] = useState('Email atau password salah. Silakan coba lagi.');
     const [showError, setShowError] = useState(true);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setShowError(false);
 
-        if (email === 'guru@snbp.com' && password === '123456') {
-            navigate('/dashboard');
-        } else if (email === 'ortu@snbp.com' && password === '123456') {
-            navigate('/ortu/dashboard');
-        } else if (email === 'admin@snbp.com' && password === '123456') {
-            navigate('/admin/dashboard');
-        } else {
+        try {
+            const response = await api.post('/auth/login', { email, password });
+
+            // Simpan token
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('role', response.data.user.role);
+
+            // Arahkan berdasarkan role
+            const role = response.data.user.role;
+            if (role === 'guru') navigate('/dashboard');
+            if (role === 'ortu') navigate('/ortu/dashboard');
+            if (role === 'admin') navigate('/admin/dashboard');
+
+        } catch (err) {
             setShowError(true);
+            setError('Email atau password salah. Silakan coba lagi.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -62,8 +76,8 @@ export default function LoginPage() {
                         />
                     </div>
 
-                    <button type="submit" className="btn-login">
-                        Masuk
+                    <button type="submit" className="btn-login" disabled={loading}>
+                        {loading ? 'Memeriksa...' : 'Masuk'}
                     </button>
                 </form>
 

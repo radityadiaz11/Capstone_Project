@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DashboardPage.css'; // Share the premium layout and sidebar style
 import './PrediksiSiswa_Page.css';
+import api from '../../api/axios';
 
 const navMenu = [
   {
@@ -111,12 +112,12 @@ const PrediksiSiswa_Page = () => {
     { id: 7, name: 'Muhammad Naufal', prodi: 'Teknik Sipil - UNY', score: 62.4, prediction: 48, status: 'Berisiko' },
   ];
 
-  const filteredStudents = activeFilter === 'Semua' 
-    ? students 
+  const filteredStudents = activeFilter === 'Semua'
+    ? students
     : students.filter(s => s.status === activeFilter);
 
   const getStatusClass = (status) => {
-    switch(status) {
+    switch (status) {
       case 'Siap': return 'status-siap';
       case 'Perhatian': return 'status-perhatian';
       case 'Berisiko': return 'status-berisiko';
@@ -177,7 +178,7 @@ const PrediksiSiswa_Page = () => {
           <div className="controls-section">
             <div className="filter-buttons">
               {['Semua', 'Siap', 'Perhatian', 'Berisiko'].map(filter => (
-                <button 
+                <button
                   key={filter}
                   className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
                   onClick={() => setActiveFilter(filter)}

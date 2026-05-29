@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DashboardPage.css'; // Premium shell and sidebar styles
 import './DataNilai_Page.css';
+import api from '../../api/axios';
+
 
 const navMenu = [
   {
@@ -153,7 +155,7 @@ const DataNilai_Page = () => {
 
         {/* Content Area */}
         <main className="db-content nilai-content-wrapper">
-          
+
           {/* Top 4 Stat Cards */}
           <section className="summary-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
             {statCards.map((card, idx) => (
@@ -167,7 +169,7 @@ const DataNilai_Page = () => {
 
           {/* Middle Layout (Subjects average vs stats distribution) */}
           <div className="db-mid-row nilai-grid-row">
-            
+
             {/* Left Card: Rata-rata nilai per mata pelajaran */}
             <div className="db-card nilai-subjects-card">
               <div className="db-card-header">
@@ -182,10 +184,10 @@ const DataNilai_Page = () => {
                     <div className="db-progress-track">
                       <div
                         className="db-progress-fill"
-                        style={{ 
-                          width: `${subj.score}%`, 
+                        style={{
+                          width: `${subj.score}%`,
                           background: subj.score >= 75 ? '#2563eb' : '#ef4444' // Blue above KKM (75), red below
-                        }} 
+                        }}
                       />
                     </div>
                     <span className="db-progress-count nilai-subj-score">{subj.score}</span>
@@ -196,7 +198,7 @@ const DataNilai_Page = () => {
 
             {/* Right Cards Stack: Distribusi & Tren */}
             <div className="nilai-right-stack">
-              
+
               {/* Card 1: Distribusi Nilai */}
               <div className="db-card nilai-dist-card">
                 <div className="db-card-header" style={{ marginBottom: '14px' }}>
@@ -237,14 +239,14 @@ const DataNilai_Page = () => {
                     {/* SVG Gradients for high fidelity look */}
                     <defs>
                       <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#2563eb" stopOpacity="0.2"/>
-                        <stop offset="100%" stopColor="#2563eb" stopOpacity="0.0"/>
+                        <stop offset="0%" stopColor="#2563eb" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#2563eb" stopOpacity="0.0" />
                       </linearGradient>
                     </defs>
 
                     {/* Area fill */}
-                    <path 
-                      d="M 40 60 L 100 55 L 160 56 L 220 48 L 280 40 L 280 80 L 40 80 Z" 
+                    <path
+                      d="M 40 60 L 100 55 L 160 56 L 220 48 L 280 40 L 280 80 L 40 80 Z"
                       fill="url(#chart-grad)"
                     />
 
@@ -254,11 +256,11 @@ const DataNilai_Page = () => {
                     <line x1="40" y1="70" x2="280" y2="70" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="4 4" />
 
                     {/* Chart Line path */}
-                    <path 
-                      d="M 40 60 L 100 55 L 160 56 L 220 48 L 280 40" 
-                      fill="none" 
-                      stroke="#2563eb" 
-                      strokeWidth="2.5" 
+                    <path
+                      d="M 40 60 L 100 55 L 160 56 L 220 48 L 280 40"
+                      fill="none"
+                      stroke="#2563eb"
+                      strokeWidth="2.5"
                       strokeLinecap="round"
                     />
 

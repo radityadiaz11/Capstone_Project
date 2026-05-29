@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './DashboardPage.css';
+import api from '../../api/axios';
+
 
 /* ── Mock data ─────────────────────────────────────────────────── */
 const navMenu = [
