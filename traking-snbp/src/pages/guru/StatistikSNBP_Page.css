@@ -1,0 +1,201 @@
+/* ═══════════════════════════════════════════════════════════════
+   StatistikSNBP_Page.css  —  SNBP Monitor Laporan Statistik
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Grid Columns for 3 cards */
+.stat-three-columns {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+.text-large {
+  font-size: 16px !important;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.no-border {
+  border: none !important;
+  margin-bottom: 24px !important;
+  padding: 0 !important;
+}
+
+/* Middle Row Layout for Statistik Page */
+.stat-mid-layout {
+  grid-template-columns: 1.2fr 1fr !important;
+  align-items: stretch;
+}
+
+/* ── Left Card: Peminatan Prodi ─────────────────────────────────── */
+.stat-prodi-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-prodi-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stat-prodi-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-prodi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-prodi-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.stat-prodi-count {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.stat-prodi-track {
+  height: 10px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.stat-prodi-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Right Card: Perbandingan Lolos SNBP ───────────────────────── */
+.stat-lolos-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-chart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  min-height: 230px;
+}
+
+.stat-chart-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 16px;
+  padding: 10px 10px 24px;
+  flex: 1;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.stat-chart-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.stat-chart-bar {
+  width: 100%;
+  max-width: 96px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.stat-chart-bar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.bar-2023 {
+  height: 100px;
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+}
+
+.bar-2024 {
+  height: 120px;
+  background-color: #dbeafe;
+  border: 1px solid #bfdbfe;
+}
+
+.bar-2025.highlighted {
+  height: 140px;
+  background-color: #689f38; /* Matches the rich olive green tone */
+  border: 1px solid #558b2f;
+}
+
+.stat-bar-val {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+.stat-bar-val.text-white {
+  color: #ffffff;
+}
+
+.stat-bar-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.stat-bar-label.font-medium.text-dark {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.stat-chart-legend {
+  font-size: 12px;
+  color: #64748b;
+  text-align: center;
+  padding-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.legend-plus {
+  font-weight: 700;
+  font-size: 14px;
+  color: #475569;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  .stat-three-columns {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .stat-mid-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-three-columns {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .stat-chart-bar {
+    max-width: 80px;
+  }
+}

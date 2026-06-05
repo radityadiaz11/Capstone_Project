@@ -1,0 +1,156 @@
+/* ═══════════════════════════════════════════════════════════════
+   Notifikasi_Page.css — Premium Notification Page Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+.notif-content-wrapper {
+  max-width: 1100px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 28px;
+}
+
+.notif-topbar-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notif-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notif-badge {
+  background: #fef2f2;
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid #fecaca;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notif-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Notification Card ────────────────────────────────────────── */
+.notif-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 24px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #f1f3f7;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.notif-card.clickable {
+  cursor: pointer;
+}
+
+.notif-card.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+.notif-circle-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.notif-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.notif-card-msg {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.45;
+  letter-spacing: -0.1px;
+}
+
+.notif-card-meta {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* ── Style Variants matching the exact borders and backgrounds ──── */
+
+/* Warning Card (Card 1) - Light pinkish-red borders and backgrounds */
+.notif-card-warning {
+  border-color: #fee2e2;
+  background: #fff8f8;
+}
+.icon-warning {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Danger-Alt Card (Card 2) - Soft orange background */
+.notif-card-danger-alt {
+  border-color: #fef3c7;
+  background: #fffbeb;
+}
+.icon-danger-alt {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* Danger Card (Card 3) - Pink border and background */
+.notif-card-danger {
+  border-color: #ffe4e6;
+  background: #fff1f2;
+}
+.icon-danger {
+  background: #ffe4e6;
+  color: #be123c;
+}
+
+/* Info Card (Card 5) - Neutral border and light blue icon */
+.notif-card-info {
+  border-color: #e2e8f0;
+  background: #f8fafc;
+}
+.icon-info {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+/* Success-Alt Card (Card 6) - Neutral border and yellow trophy icon */
+.notif-card-success-alt {
+  border-color: #e2e8f0;
+  background: #f8fafc;
+}
+.icon-success-alt {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+/* Header style alignment */
+.notif-topbar {
+  padding: 20px 28px 18px !important;
+}

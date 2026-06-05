@@ -1,0 +1,173 @@
+/* ===================================================
+   NOTIFIKASI ADMIN PAGE — ADMIN / KEPSEK
+   Inherits sidebar styles from DashboardSekolah_Page.css
+   =================================================== */
+
+@import './DashboardSekolah_Page.css';
+
+/* --- Page Shell --- */
+.nka-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background-color: #f5f6fa;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #334155;
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   MAIN WRAPPER
+   =================================================== */
+.nka-main {
+  flex-grow: 1;
+  margin-left: 220px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   CONTENT AREA
+   =================================================== */
+.nka-content {
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   NOTIFICATION LIST
+   =================================================== */
+.nka-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 720px;
+}
+
+/* ===================================================
+   NOTIFICATION ITEM
+   =================================================== */
+.nka-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background-color: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 14px;
+  padding: 16px 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.18s, transform 0.18s;
+  cursor: default;
+}
+
+.nka-item:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  transform: translateY(-1px);
+}
+
+/* Unread highlight — subtle left border */
+.nka-item-unread {
+  border-left: 3px solid #185FA5;
+  background-color: #fafcff;
+}
+
+/* ===================================================
+   ICON
+   =================================================== */
+.nka-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.nka-icon-warn {
+  background-color: #fff4e5;
+  color: #d97706;
+  border: 1px solid #fde68a;
+}
+
+.nka-icon-success {
+  background-color: #e6f4ea;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.nka-icon-deadline {
+  background-color: #fde8e8;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.nka-icon-info {
+  background-color: #eff3fb;
+  color: #3b5fc0;
+  border: 1px solid #c7d7f8;
+}
+
+/* ===================================================
+   BODY TEXT
+   =================================================== */
+.nka-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+}
+
+.nka-pesan {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.nka-item-unread .nka-pesan {
+  font-weight: 700;
+}
+
+.nka-waktu {
+  font-size: 12px;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+/* ===================================================
+   RESPONSIVE — Mobile ≤ 768px
+   =================================================== */
+@media (max-width: 768px) {
+  .nka-main {
+    margin-left: 0;
+  }
+
+  .nka-content {
+    padding: 20px;
+  }
+
+  .nka-list {
+    max-width: 100%;
+  }
+
+  .nka-item {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .nka-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .nka-pesan {
+    font-size: 13px;
+  }
+}

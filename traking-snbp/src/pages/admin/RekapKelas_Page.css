@@ -1,0 +1,587 @@
+/* ===================================================
+   REKAP PER KELAS — ADMIN / KEPSEK
+   RekapKelas_Page.css
+   =================================================== */
+
+/* --- Page Shell --- */
+.rkp-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background-color: #f5f6fa;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #334155;
+  box-sizing: border-box;
+}
+
+/* --- Mobile Header (hidden on desktop) --- */
+.rkp-mobile-header {
+  display: none;
+}
+
+/* ===================================================
+   SIDEBAR
+   =================================================== */
+.rkp-sidebar {
+  width: 220px;
+  min-width: 220px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid #e8eaf0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
+  transition: transform 0.25s ease-in-out;
+  overflow-y: auto;
+}
+
+/* Brand */
+.rkp-brand {
+  margin-bottom: 20px;
+}
+
+.rkp-brand-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.rkp-brand-sub {
+  font-size: 9px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin: 2px 0 0 0;
+}
+
+/* Role Badge */
+.rkp-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ede9fe;
+  color: #6d28d9;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  border: 1px solid #ddd6fe;
+  margin-bottom: 28px;
+}
+
+.rkp-role-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #6d28d9;
+  flex-shrink: 0;
+}
+
+/* Navigation */
+.rkp-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rkp-nav-label {
+  font-size: 9px;
+  font-weight: 800;
+  color: #94a3b8;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin: 4px 0 6px 8px;
+  display: block;
+}
+
+.rkp-nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  background: transparent;
+  color: #475569;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+  box-sizing: border-box;
+}
+
+.rkp-nav-item:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.rkp-nav-item.active {
+  background-color: #eff5fb;
+  color: #185FA5;
+  font-weight: 700;
+}
+
+.rkp-nav-icon {
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  flex-shrink: 0;
+}
+
+/* Sidebar Bottom */
+.rkp-sidebar-bottom {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rkp-notif-badge {
+  background-color: #ef4444;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  margin-left: auto;
+}
+
+.rkp-nav-logout {
+  color: #dc2626;
+}
+
+.rkp-nav-logout:hover {
+  background-color: #fef2f2;
+  color: #b91c1c;
+}
+
+/* ===================================================
+   MAIN CONTENT
+   =================================================== */
+.rkp-main {
+  flex-grow: 1;
+  margin-left: 220px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ── Topbar ── */
+.rkp-topbar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(245, 246, 250, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 90;
+  padding: 18px 32px;
+  border-bottom: 1px solid #e8eaf0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.rkp-page-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.rkp-page-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.rkp-page-sub {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+  margin: 2px 0 0 0;
+}
+
+.rkp-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rkp-profile-text {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.rkp-profile-name {
+  font-weight: 800;
+  font-size: 14px;
+  color: #1e293b;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.rkp-profile-role {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.rkp-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #6d28d9;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(109, 40, 217, 0.3);
+  flex-shrink: 0;
+}
+
+/* ── Content Area ── */
+.rkp-content {
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   CARD (shared wrapper)
+   =================================================== */
+.rkp-card {
+  background-color: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   TABLE — Rekap Kelas
+   =================================================== */
+.rkp-table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.rkp-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+/* Header row */
+.rkp-table thead tr {
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.rkp-table th {
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #94a3b8;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+/* Column header color hints */
+.rkp-th-siap     { color: #16a34a; }
+.rkp-th-perhatian{ color: #64748b; }
+.rkp-th-berisiko { color: #dc2626; }
+.rkp-th-prediksi { color: #ca8a04; text-align: center; }
+
+/* Body rows */
+.rkp-table tbody tr {
+  border-bottom: 1px solid #f8fafc;
+  transition: background 0.12s;
+}
+
+.rkp-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.rkp-table tbody tr:hover td {
+  background-color: #fafbfd;
+}
+
+.rkp-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  white-space: nowrap;
+}
+
+/* Alternating row tint */
+.rkp-row-even td {
+  background-color: #fafbfc;
+}
+
+/* Column-specific cell styles */
+.rkp-td-kelas {
+  font-weight: 800;
+  color: #0f172a;
+  font-size: 14px;
+}
+
+.rkp-td-wali {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.rkp-td-siap {
+  font-weight: 800;
+  color: #16a34a;
+}
+
+.rkp-td-perhatian {
+  font-weight: 700;
+  color: #475569;
+}
+
+.rkp-td-berisiko {
+  font-weight: 800;
+  color: #dc2626;
+}
+
+/* Prediksi badge pill */
+.rkp-prediksi-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  letter-spacing: 0.2px;
+}
+
+/* ===================================================
+   BAR CHART — Visualisasi Prediksi
+   =================================================== */
+
+.rkp-chart-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 24px 0;
+}
+
+.rkp-chart-area {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 12px;
+  padding: 0 8px;
+}
+
+.rkp-bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Fixed-height track so bars grow upward */
+.rkp-bar-track {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.rkp-bar {
+  width: 100%;
+  max-width: 88px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
+  opacity: 0.92;
+  cursor: default;
+  min-height: 32px;
+}
+
+.rkp-bar:hover {
+  opacity: 1;
+  filter: brightness(1.06);
+}
+
+.rkp-bar-pct {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  user-select: none;
+}
+
+.rkp-bar-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ===================================================
+   RESPONSIVE — Tablet ≤ 1024px
+   =================================================== */
+@media (max-width: 1024px) {
+  .rkp-content {
+    padding: 24px 20px;
+  }
+
+  .rkp-topbar {
+    padding: 16px 20px;
+  }
+}
+
+/* ===================================================
+   RESPONSIVE — Mobile ≤ 768px
+   =================================================== */
+@media (max-width: 768px) {
+
+  /* Show mobile header */
+  .rkp-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 14px 20px;
+    border-bottom: 1px solid #e8eaf0;
+    position: sticky;
+    top: 0;
+    z-index: 110;
+  }
+
+  .rkp-mobile-brand {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rkp-mobile-brand-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .rkp-mobile-brand-sub {
+    font-size: 9px;
+    color: #94a3b8;
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  .rkp-mobile-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #475569;
+    padding: 4px;
+    line-height: 1;
+  }
+
+  /* Sidebar slides over as overlay */
+  .rkp-sidebar {
+    width: 100%;
+    height: calc(100vh - 56px);
+    top: 56px;
+    border-right: none;
+    border-bottom: 1px solid #e8eaf0;
+    transform: translateX(-100%);
+  }
+
+  .rkp-sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Main takes full width */
+  .rkp-main {
+    margin-left: 0;
+  }
+
+  .rkp-topbar {
+    padding: 14px 16px;
+  }
+
+  .rkp-page-title {
+    font-size: 17px;
+  }
+
+  .rkp-content {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .rkp-card {
+    padding: 16px;
+  }
+
+  /* Table scrolls horizontally */
+  .rkp-table th,
+  .rkp-table td {
+    padding: 11px 12px;
+    font-size: 13px;
+  }
+
+  /* Smaller chart */
+  .rkp-bar-track {
+    height: 120px;
+  }
+
+  .rkp-bar-pct {
+    font-size: 11px;
+  }
+
+  .rkp-bar-label {
+    font-size: 10px;
+  }
+
+  /* Hide profile text on very small header */
+  .rkp-profile-text {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .rkp-chart-area {
+    gap: 6px;
+  }
+
+  .rkp-bar {
+    max-width: 48px;
+  }
+
+  .rkp-bar-pct {
+    font-size: 10px;
+  }
+}

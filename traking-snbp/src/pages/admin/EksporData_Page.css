@@ -1,0 +1,259 @@
+/* ===================================================
+   EKSPOR DATA PAGE — ADMIN / KEPSEK
+   Inherits sidebar styles from DashboardSekolah_Page.css
+   =================================================== */
+
+/* Import shared sidebar + topbar tokens */
+
+
+/* --- Page Shell --- */
+.ekd-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background-color: #f5f6fa;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #334155;
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   MAIN WRAPPER
+   =================================================== */
+.ekd-main {
+  flex-grow: 1;
+  margin-left: 220px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   CONTENT AREA
+   =================================================== */
+.ekd-content {
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   GRID — Left (cards) + Right (history)
+   =================================================== */
+.ekd-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ===================================================
+   LEFT COLUMN — Ekspor Cards
+   =================================================== */
+.ekd-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===================================================
+   SHARED CARD
+   =================================================== */
+.ekd-card {
+  background-color: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-sizing: border-box;
+}
+
+.ekd-card:hover {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+  transform: translateY(-1px);
+}
+
+/* ===================================================
+   CARD HEADER
+   =================================================== */
+.ekd-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ekd-card-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 6px 0;
+}
+
+.ekd-card-desc {
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ===================================================
+   FORMAT BADGES
+   =================================================== */
+.ekd-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ekd-badge-pdf {
+  background-color: #fde8e8;
+  color: #c0392b;
+  border: 1px solid #fbc9c9;
+}
+
+.ekd-badge-excel {
+  background-color: #e6f4ea;
+  color: #1e7e34;
+  border: 1px solid #b7dfbe;
+}
+
+.ekd-badge-csv {
+  background-color: #e8eaf0;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+/* ===================================================
+   EXPORT BUTTON
+   =================================================== */
+.ekd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+}
+
+.ekd-btn:hover:not(:disabled) {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ekd-btn:disabled,
+.ekd-btn.ekd-btn-loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ekd-btn-arrow {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Spinner */
+.ekd-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #cbd5e1;
+  border-top-color: #185FA5;
+  border-radius: 50%;
+  animation: ekd-spin 0.7s linear infinite;
+}
+
+@keyframes ekd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===================================================
+   RIGHT COLUMN — Riwayat Ekspor
+   =================================================== */
+.ekd-right {
+  position: sticky;
+  top: 80px;
+}
+
+.ekd-riwayat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 16px;
+}
+
+.ekd-riwayat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+  gap: 10px;
+}
+
+.ekd-riwayat-item:last-child {
+  border-bottom: none;
+}
+
+.ekd-riwayat-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.4;
+}
+
+.ekd-riwayat-note {
+  font-size: 11px;
+  font-weight: 500;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* ===================================================
+   RESPONSIVE — Tablet ≤ 1100px
+   =================================================== */
+@media (max-width: 1100px) {
+  .ekd-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ekd-right {
+    position: static;
+  }
+}
+
+/* ===================================================
+   RESPONSIVE — Mobile ≤ 768px
+   =================================================== */
+@media (max-width: 768px) {
+  .ekd-main {
+    margin-left: 0;
+  }
+
+  .ekd-content {
+    padding: 20px;
+  }
+
+  .ekd-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

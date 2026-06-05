@@ -1,0 +1,723 @@
+/* ===================================================
+   DASHBOARD SEKOLAH — ADMIN / KEPSEK
+   Responsive Admin Dashboard CSS
+   =================================================== */
+
+/* --- Page Shell --- */
+.dbs-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background-color: #f5f6fa;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #334155;
+  box-sizing: border-box;
+}
+
+/* --- Mobile Header (hidden on desktop) --- */
+.dbs-mobile-header {
+  display: none;
+}
+
+/* ===================================================
+   SIDEBAR
+   =================================================== */
+.dbs-sidebar {
+  width: 220px;
+  min-width: 220px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid #e8eaf0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
+  transition: transform 0.25s ease-in-out;
+  overflow-y: auto;
+}
+
+/* Brand */
+.dbs-brand {
+  margin-bottom: 20px;
+}
+
+.dbs-brand-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.dbs-brand-sub {
+  font-size: 9px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin: 2px 0 0 0;
+}
+
+/* Role Badge — purple/indigo for admin */
+.dbs-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ede9fe;
+  color: #6d28d9;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  border: 1px solid #ddd6fe;
+  margin-bottom: 28px;
+}
+
+.dbs-role-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #6d28d9;
+  flex-shrink: 0;
+}
+
+/* Navigation */
+.dbs-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dbs-nav-label {
+  font-size: 9px;
+  font-weight: 800;
+  color: #94a3b8;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin: 4px 0 6px 8px;
+  display: block;
+}
+
+.dbs-nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  background: transparent;
+  color: #475569;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+  box-sizing: border-box;
+}
+
+.dbs-nav-item:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.dbs-nav-item.active {
+  background-color: #eff5fb;
+  color: #185FA5;
+  font-weight: 700;
+}
+
+.dbs-nav-icon {
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  flex-shrink: 0;
+}
+
+/* Sidebar Bottom */
+.dbs-sidebar-bottom {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dbs-notif-badge {
+  background-color: #ef4444;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  margin-left: auto;
+}
+
+.dbs-nav-logout {
+  color: #dc2626;
+}
+.dbs-nav-logout:hover {
+  background-color: #fef2f2;
+  color: #b91c1c;
+}
+
+/* ===================================================
+   MAIN CONTENT
+   =================================================== */
+.dbs-main {
+  flex-grow: 1;
+  margin-left: 220px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Topbar */
+.dbs-topbar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(245, 246, 250, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 90;
+  padding: 18px 28px;
+  border-bottom: 1px solid #e8eaf0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.dbs-page-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dbs-page-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.dbs-page-sub {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 500;
+  margin: 2px 0 0 0;
+}
+
+.dbs-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dbs-profile-text {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.dbs-profile-name {
+  font-weight: 800;
+  font-size: 14px;
+  color: #1e293b;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.dbs-profile-role {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.dbs-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #6d28d9;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(109, 40, 217, 0.3);
+}
+
+/* ===================================================
+   CONTENT AREA
+   =================================================== */
+.dbs-content {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* ===================================================
+   STAT CARDS — 4 columns
+   =================================================== */
+.dbs-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.dbs-stat-card {
+  background-color: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 12px;
+  padding: 20px 22px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-sizing: border-box;
+}
+
+.dbs-stat-card:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+  transform: translateY(-1px);
+}
+
+.dbs-stat-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 10px;
+  letter-spacing: 0.1px;
+}
+
+.dbs-stat-value {
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+.dbs-stat-sub {
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+/* Color variants */
+.dbs-val-blue  { color: #185FA5; }
+.dbs-val-green { color: #16a34a; }
+.dbs-val-red   { color: #dc2626; }
+.dbs-sub-green { color: #16a34a; }
+.dbs-sub-red   { color: #dc2626; }
+
+/* ===================================================
+   BOTTOM GRID — Table (left) + Right stack
+   =================================================== */
+.dbs-bottom-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ===================================================
+   SHARED CARD
+   =================================================== */
+.dbs-card {
+  background-color: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
+}
+
+.dbs-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dbs-card-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+}
+
+.dbs-card-header .dbs-card-title {
+  margin-bottom: 0;
+}
+
+.dbs-badge-blue {
+  background-color: #eff5fb;
+  color: #185FA5;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px solid #d2e2f2;
+}
+
+/* ===================================================
+   TABLE — Rekap Per Kelas
+   =================================================== */
+.dbs-table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.dbs-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.dbs-table th {
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #94a3b8;
+  border-bottom: 1px solid #f1f5f9;
+  white-space: nowrap;
+}
+
+.dbs-table td {
+  padding: 12px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  border-bottom: 1px solid #f8fafc;
+}
+
+.dbs-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dbs-table tbody tr:hover td {
+  background-color: #fafbfc;
+}
+
+.dbs-td-kelas {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.dbs-th-perhatian, .dbs-td-perhatian {
+  color: #f59e0b;
+}
+
+.dbs-th-berisiko, .dbs-td-berisiko {
+  color: #dc2626;
+}
+
+.dbs-prediksi-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+/* ===================================================
+   RIGHT STACK
+   =================================================== */
+.dbs-right-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Ringkasan */
+.dbs-summary-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dbs-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13px;
+}
+
+.dbs-summary-row:last-child {
+  border-bottom: none;
+}
+
+.dbs-summary-label {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.dbs-summary-val {
+  font-weight: 800;
+  color: #1e293b;
+}
+
+/* Aktivitas */
+.dbs-activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dbs-activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  border: 1px solid #f1f5f9;
+}
+
+.dbs-activity-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.dbs-icon-success {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.dbs-icon-warn {
+  background-color: #fef9c3;
+  color: #ca8a04;
+}
+
+.dbs-activity-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dbs-activity-msg {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.dbs-activity-time {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* ===================================================
+   BAR CHART
+   =================================================== */
+.dbs-chart-card {
+  /* extra bottom space */
+  margin-bottom: 8px;
+}
+
+.dbs-chart-area {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 200px;
+  padding: 0 8px 8px;
+  margin-top: 16px;
+  gap: 10px;
+}
+
+.dbs-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 100px;
+}
+
+.dbs-bar {
+  width: 100%;
+  max-width: 80px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+  transition: height 0.5s ease-out, opacity 0.2s;
+  position: relative;
+  min-height: 28px;
+  box-sizing: border-box;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.dbs-bar:hover {
+  opacity: 1;
+  filter: brightness(1.08);
+}
+
+.dbs-bar-pct {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+.dbs-bar-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ===================================================
+   RESPONSIVE — Tablet ≤ 1100px
+   =================================================== */
+@media (max-width: 1100px) {
+  .dbs-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dbs-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===================================================
+   RESPONSIVE — Mobile ≤ 768px
+   =================================================== */
+@media (max-width: 768px) {
+
+  /* Show mobile header */
+  .dbs-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 14px 20px;
+    border-bottom: 1px solid #e8eaf0;
+    position: sticky;
+    top: 0;
+    z-index: 110;
+  }
+
+  .dbs-mobile-brand {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dbs-mobile-brand-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .dbs-mobile-brand-sub {
+    font-size: 9px;
+    color: #94a3b8;
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  .dbs-mobile-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #475569;
+    padding: 4px;
+    line-height: 1;
+  }
+
+  /* Sidebar becomes overlay */
+  .dbs-sidebar {
+    width: 100%;
+    height: calc(100vh - 56px);
+    top: 56px;
+    border-right: none;
+    border-bottom: 1px solid #e8eaf0;
+    transform: translateX(-100%);
+  }
+
+  .dbs-sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Main shifts to full width */
+  .dbs-main {
+    margin-left: 0;
+  }
+
+  /* Topbar adjust */
+  .dbs-topbar {
+    padding: 14px 20px;
+  }
+
+  .dbs-page-title {
+    font-size: 17px;
+  }
+
+  .dbs-profile-name {
+    font-size: 13px;
+  }
+
+  /* Content */
+  .dbs-content {
+    padding: 20px;
+    gap: 18px;
+  }
+
+  /* Stats */
+  .dbs-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .dbs-stat-value {
+    font-size: 28px;
+  }
+
+  /* Chart */
+  .dbs-chart-area {
+    height: 150px;
+    gap: 6px;
+  }
+
+  .dbs-bar-label {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 420px) {
+  .dbs-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .dbs-stat-card {
+    padding: 14px;
+  }
+
+  .dbs-stat-value {
+    font-size: 24px;
+  }
+}

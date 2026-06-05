@@ -1,0 +1,161 @@
+/* ═══════════════════════════════════════════════════════════════
+   DataNilai_Page.css — Grade Predictions Page Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+.nilai-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Grid adjustment ────────────────────────────────────────────── */
+.nilai-grid-row {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 16px;
+}
+
+/* ── Left Card: Subjects ───────────────────────────────────────── */
+.nilai-subjects-card {
+  height: fit-content;
+}
+
+.nilai-progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.nilai-progress-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 28px !important;
+  align-items: center;
+  gap: 10px;
+}
+
+.nilai-subj-name {
+  font-size: 13.5px;
+  color: #334155;
+  font-weight: 500;
+}
+
+.nilai-subj-score {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+  text-align: right;
+}
+
+/* AI Suggestion Button */
+.ai-suggestion-wrapper {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.ai-suggest-btn {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.ai-suggest-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+/* ── Right Cards Stack ─────────────────────────────────────────── */
+.nilai-right-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Distribution list styling */
+.nilai-dist-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.nilai-dist-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10.5px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13.5px;
+}
+
+.nilai-dist-row:last-child {
+  border-bottom: none;
+}
+
+.dist-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Trend Card Stats Grid */
+.trend-stats-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 10px;
+}
+
+.trend-stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.trend-val {
+  font-size: 19px;
+  font-weight: 700;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+}
+
+.trend-arrow-up {
+  color: #16a34a;
+  font-size: 14px;
+  margin-left: 2px;
+  font-weight: 700;
+}
+
+.trend-sem {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* SVG Chart Container */
+.trend-chart-container {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trend-svg {
+  overflow: visible;
+}
+
+/* Responsive grades details layout */
+@media (max-width: 1024px) {
+  .nilai-grid-row {
+    grid-template-columns: 1fr;
+  }
+}
