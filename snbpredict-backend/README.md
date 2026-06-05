@@ -1,569 +1,187 @@
 # SNBPredict Backend API
 
-REST API backend untuk aplikasi **SNBPredict** - Sistem Prediksi dan Monitoring Performa Siswa SNBP (Seleksi Nasional Berdasarkan Prestasi).
-
-## 📋 Daftar Isi
-
-- [Overview](#overview)
-- [Teknologi](#teknologi)
-- [Struktur Folder](#struktur-folder)
-- [Instalasi](#instalasi)
-- [Konfigurasi Environment](#konfigurasi-environment)
-- [Menjalankan Aplikasi](#menjalankan-aplikasi)
-- [API Endpoints](#api-endpoints)
-- [Database Models](#database-models)
-- [Middleware & Authentication](#middleware--authentication)
-- [Utility Scripts](#utility-scripts)
+Backend API untuk aplikasi **SNBPredict** yang dibangun menggunakan Node.js, Express, dan Sequelize ORM. API ini mendukung manajemen data siswa, sistem prediksi kelolosan SNBP, visualisasi statistik dashboard, sistem peringatan dini (*early warning*), dan autentikasi berbasis JSON Web Token (JWT).
 
 ---
 
-## 🎯 Overview
+## 🚀 Fitur Utama
 
-SNBPredict Backend adalah API yang menyediakan fungsionalitas untuk:
-
-- ✅ **Authentication & Authorization** - Login, register, JWT token management
-- ✅ **Student Management** - CRUD data siswa dengan role-based access
-- ✅ **Academic Data** - Manajemen data nilai akademik siswa
-- ✅ **Prediction System** - Prediksi performa siswa menggunakan ML
-- ✅ **Early Warning** - Sistem notifikasi siswa yang membutuhkan perhatian khusus
-- ✅ **Dashboard Analytics** - Data statistik dan overview untuk admin/guru
-- ✅ **Data Export** - Export data dalam berbagai format
+- **Autentikasi & Otorisasi**: Registrasi dan login berbasis JWT dengan pemisahan role pengguna (`admin`, `guru`, `ortu`, `siswa`).
+- **Manajemen Data Siswa (CRUD)**: Kelola data profil, nilai rapor, dan rekap kelas siswa secara dinamis.
+- **Sistem Prediksi Kelolosan SNBP**: Integrasi ke model AI untuk memprediksi probabilitas kelolosan siswa di universitas tujuan.
+- **Early Warning System (EWS)**: Deteksi otomatis siswa yang mengalami penurunan nilai signifikan atau memerlukan bimbingan khusus.
+- **Dual-Mode Database**: Menggunakan PostgreSQL untuk penyimpanan persisten, dengan *fallback* otomatis ke **In-Memory Mode** jika database PostgreSQL tidak dikonfigurasi atau tidak aktif.
+- **Vercel Serverless Ready**: Konfigurasi siap pakai untuk dideploy ke Vercel.
 
 ---
 
-## 🛠️ Teknologi
+## 🛠️ Teknologi yang Digunakan
 
-| Kategori | Tools |
-|----------|-------|
-| **Runtime** | Node.js |
-| **Framework** | Express.js v4.18.2 |
-| **Database** | PostgreSQL + Sequelize ORM |
-| **Authentication** | JWT (jsonwebtoken), bcryptjs |
-| **Request** | Axios |
-| **Environment** | dotenv |
-| **CORS** | cors |
-| **Dev Tools** | nodemon |
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database ORM**: Sequelize
+- **Database Driver**: PostgreSQL (`pg`, `pg-hstore`)
+- **Autentikasi & Keamanan**: `jsonwebtoken`, `bcryptjs`, `cors`
+- **HTTP Client**: `axios` (untuk berkomunikasi dengan model AI)
+- **Environment Utility**: `dotenv`
+- **Development Tool**: `nodemon`
 
 ---
 
-## 📁 Struktur Folder
+## ⚙️ Prasyarat & Persiapan
 
-```
-backend/
-├── src/
-│   ├── config/
-│   │   ├── database.js          # Konfigurasi Sequelize & PostgreSQL
-│   │   └── dataStore.js         # In-memory fallback data store
-│   ├── controllers/             # Business logic untuk setiap fitur
-│   │   ├── authController.js
-│   │   ├── studentController.js
-│   │   ├── academicController.js
-│   │   ├── predictController.js
-│   │   ├── dashboardController.js
-│   │   └── warningController.js
-│   ├── models/                  # Sequelize ORM models
-│   │   ├── User.js
-│   │   ├── Student.js
-│   │   ├── Prediksi.js
-│   │   └── EarlyWarning.js
-│   ├── routes/                  # API endpoints routing
-│   │   ├── authRoutes.js
-│   │   ├── studentRoutes.js
-│   │   ├── academicRoutes.js
-│   │   ├── predictRoutes.js
-│   │   ├── dashboardRoutes.js
-│   │   └── warningRoutes.js
-│   └── middleware/              # Custom middleware
-│       ├── authMiddleware.js    # JWT verification & role checking
-│       └── errorHandler.js      # Error handling & 404 responses
-├── data/
-│   ├── cleaned_data.csv
-│   ├── student_performance.csv
-│   └── README.md
-├── index.js                     # Entry point aplikasi
-├── package.json                 # Dependencies & scripts
-├── seedUsers.js                 # Seed script untuk create user dummy
-├── seedStudents.js              # Seed script untuk create student dummy
-└── README.md                    # File ini
+Sebelum memulai, pastikan Anda telah memasang:
+- **Node.js** (Versi 16 atau lebih baru)
+- **PostgreSQL** (Opsional, jika ingin menyimpan data secara persisten)
 
-```
+### Langkah Instalasi
 
----
+1. **Masuk ke direktori backend:**
+   ```bash
+   cd backend
+   ```
 
-## 🚀 Instalasi
+2. **Pasang dependensi Node.js:**
+   ```bash
+   npm install
+   ```
 
-### 1. Clone Repository & Install Dependencies
+3. **Konfigurasi Environment Variable (`.env`):**
+   Salin berkas `.env.example` menjadi `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+   Buka berkas `.env` dan sesuaikan nilainya:
+   ```env
+   PORT=3000
+   NODE_ENV=development
 
-```bash
-cd backend
-npm install
-```
+   # Konfigurasi Database PostgreSQL
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_NAME=snbpredict_db
+   DB_USER=postgres
+   DB_PASSWORD=isi_password_postgres_kamu
 
-### 2. Setup Database PostgreSQL
+   # JWT Secret Key
+   JWT_SECRET=snbpredict_rahasia_super_panjang_2024
+   JWT_EXPIRES=7d
 
-Pastikan PostgreSQL sudah terinstall dan running di sistem Anda.
-
-```bash
-# Create database
-createdb snbpredict_db
-
-# Atau gunakan pgAdmin GUI
-```
-
-### 3. Buat File `.env`
-
-Salin template berikut dan sesuaikan dengan konfigurasi Anda:
-
-```bash
-cp .env.example .env
-```
+   # URL Model AI (dari tim AI Engineer)
+   AI_MODEL_URL=http://localhost:5000
+   ```
 
 ---
 
-## ⚙️ Konfigurasi Environment
+## 🗃️ Seeding Database (Data Awal)
 
-Buat file `.env` di root folder backend dengan variabel berikut:
+API ini menyediakan skrip untuk membuat tabel database secara otomatis beserta data tes awal (users dan data siswa). 
 
-```env
-# Server Configuration
-PORT=3000
-NODE_ENV=development
+Jalankan perintah berikut untuk mengisi data awal:
 
-# Database Configuration
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=snbpredict_db
-DB_USER=postgres
-DB_PASSWORD=your_password
+1. **Seed Akun Pengguna (Test Users):**
+   ```bash
+   node seedUsers.js
+   ```
+   *Skrip ini akan menghasilkan 4 akun pengujian dengan password standard `password123`:*
+   - **Guru**: `sari.rahayu@sman1yk.sch.id`
+   - **Admin**: `admin@sman1yk.sch.id`
+   - **Orang Tua**: `budi.ortu@gmail.com`
+   - **Siswa**: `andi.siswa@sman1yk.sch.id`
 
-# JWT Configuration
-JWT_SECRET=your_jwt_secret_key_here
-JWT_EXPIRE=7d
-
-# CORS Configuration
-CORS_ORIGIN=http://localhost:5173
-
-# ML/Prediction Service (optional)
-ML_SERVICE_URL=http://localhost:8000
-ML_API_KEY=your_ml_api_key
-```
-
-### Penjelasan Variabel:
-
-| Variabel | Deskripsi |
-|----------|-----------|
-| `PORT` | Port server (default: 3000) |
-| `DB_HOST` | Host database PostgreSQL |
-| `DB_PORT` | Port PostgreSQL (default: 5432) |
-| `DB_NAME` | Nama database |
-| `DB_USER` | Username PostgreSQL |
-| `DB_PASSWORD` | Password PostgreSQL |
-| `JWT_SECRET` | Secret key untuk JWT signing |
-| `CORS_ORIGIN` | URL frontend untuk CORS policy |
+2. **Seed Data Siswa & Akademik:**
+   ```bash
+   node seedStudents.js
+   ```
 
 ---
 
-## ▶️ Menjalankan Aplikasi
+## 🏃 Menjalankan Aplikasi
 
-### Development Mode (dengan hot-reload)
-
+### Mode Pengembangan (Development)
+Menjalankan server lokal dengan fitur auto-reload menggunakan `nodemon`:
 ```bash
 npm run dev
 ```
+Server akan berjalan di: `http://localhost:3000`
 
-Server akan berjalan di `http://localhost:3000` dan auto-reload ketika file berubah.
-
-### Production Mode
-
+### Mode Produksi (Production)
+Menjalankan server tanpa auto-reload:
 ```bash
 npm start
 ```
 
 ---
 
-## 📡 API Endpoints
+## 📁 Struktur Direktori
 
-### Base URL
-```
-http://localhost:3000/api/v1
-```
-
-### 🔐 Authentication Routes
-
-**Prefix:** `/auth`
-
-| Method | Endpoint | Deskripsi | Auth Required |
-|--------|----------|-----------|---------------|
-| POST | `/register` | Register user baru | ❌ |
-| POST | `/login` | Login & dapatkan JWT token | ❌ |
-
-**Request Body - Register:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "securepassword123",
-  "role": "guru"
-}
-```
-
-**Request Body - Login:**
-```json
-{
-  "email": "john@example.com",
-  "password": "securepassword123"
-}
-```
-
-**Response - Login Success:**
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": 1,
-    "name": "John Doe",
-    "email": "john@example.com",
-    "role": "guru"
-  }
-}
+```text
+backend/
+├── data/                  # Penyimpanan data lokal (opsional/in-memory)
+├── src/
+│   ├── config/            # Konfigurasi database & data store
+│   ├── controllers/       # Logika utama penanganan request (controllers)
+│   ├── middleware/        # Middleware Express (autentikasi, error handler)
+│   ├── models/            # Skema model Sequelize (User, Student, dll.)
+│   └── routes/            # Definisi endpoint API Express
+├── index.js               # Titik masuk utama aplikasi (main entrypoint)
+├── seedUsers.js           # Seeder untuk data akun pengujian
+├── seedStudents.js        # Seeder untuk data siswa
+├── vercel.json            # Konfigurasi deployment untuk Vercel Serverless
+└── package.json           # Definisi dependensi & script project
 ```
 
 ---
 
-### 👨‍🎓 Student Routes
+## 🔌 Daftar Endpoint API
 
-**Prefix:** `/students` | **Auth Required:** ✅ JWT Token
+Semua endpoint API menggunakan prefix `/api/v1`.
 
-| Method | Endpoint | Deskripsi | Role |
-|--------|----------|-----------|------|
-| GET | `/` | Ambil semua siswa | guru, admin |
-| GET | `/:id` | Ambil detail siswa by ID | guru, admin, ortu |
-| POST | `/` | Buat siswa baru | admin, guru |
-| PUT | `/:id` | Update data siswa | admin, guru |
-| DELETE | `/:id` | Hapus siswa | admin |
+### 1. Autentikasi (`/api/v1/auth`)
+| Metode | Endpoint | Deskripsi | Otorisasi |
+|---|---|---|---|
+| **POST** | `/register` | Pendaftaran akun pengguna baru | Publik |
+| **POST** | `/login` | Login pengguna dan mengembalikan JWT token | Publik |
 
-**Request Body - Create Student:**
-```json
-{
-  "nama": "Budi Santoso",
-  "nisn": "0012345678",
-  "email": "budi@example.com",
-  "no_telepon": "081234567890",
-  "kelas": "12-A",
-  "sekolah": "SMA Negeri 1"
-}
-```
+### 2. Manajemen Siswa (`/api/v1/students`)
+| Metode | Endpoint | Deskripsi | Otorisasi |
+|---|---|---|---|
+| **GET** | `/` | Mengambil seluruh data siswa | JWT |
+| **GET** | `/:id` | Mengambil detail 1 siswa berdasarkan ID | JWT |
+| **POST** | `/` | Menambahkan data siswa baru | JWT |
+| **PUT** | `/:id` | Memperbarui data siswa | JWT |
+| **DELETE** | `/:id` | Menghapus data siswa | JWT |
 
----
+### 3. Prediksi SNBP (`/api/v1/predict`)
+| Metode | Endpoint | Deskripsi | Otorisasi |
+|---|---|---|---|
+| **POST** | `/` | Melakukan prediksi kelolosan SNBP siswa ke AI service | JWT |
 
-### 📚 Academic Routes
+### 4. Ringkasan & Dashboard (`/api/v1/dashboard`)
+| Metode | Endpoint | Deskripsi | Otorisasi |
+|---|---|---|---|
+| **GET** | `/` | Mengambil data statistik ringkasan dashboard | JWT |
+| **GET** | `/snbp-stats` | Mengambil data statistik visualisasi SNBP | JWT |
 
-**Prefix:** `/academic` | **Auth Required:** ✅ JWT Token
+### 5. Peringatan Dini / Early Warning (`/api/v1/warnings`)
+| Metode | Endpoint | Deskripsi | Otorisasi |
+|---|---|---|---|
+| **GET** | `/` | Mengambil daftar peringatan penurunan performa siswa | JWT |
+| **PUT** | `/:id/read` | Menandai pesan peringatan tertentu telah dibaca | JWT |
 
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | `/` | Ambil semua data akademik |
-| POST | `/` | Tambah nilai akademik siswa |
-| PUT | `/:id` | Update nilai siswa |
-
-**Request Body - Add Academic Data:**
-```json
-{
-  "studentId": 1,
-  "semester": 1,
-  "math": 85,
-  "science": 78,
-  "indonesian": 82,
-  "english": 76,
-  "average": 80.25
-}
-```
+### 6. Akademik & Monitoring (`/api/v1/academic`)
+| Metode | Endpoint | Deskripsi | Otorisasi |
+|---|---|---|---|
+| **GET** | `/scores` | Mengambil data riwayat nilai akademik siswa | JWT |
+| **GET** | `/monitoring` | Mengambil data monitoring bimbingan siswa | JWT |
 
 ---
 
-### 🔮 Prediction Routes
+## ☁️ Deployment ke Vercel
 
-**Prefix:** `/predict` | **Auth Required:** ✅ JWT Token
+Backend ini dirancang agar kompatibel dengan **Vercel Serverless Functions**. File konfigurasi `vercel.json` telah disediakan secara otomatis.
 
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | `/` | Ambil semua prediksi |
-| POST | `/` | Buat prediksi baru untuk siswa |
-| GET | `/:studentId` | Ambil prediksi siswa tertentu |
-
-**Request Body - Create Prediction:**
-```json
-{
-  "studentId": 1,
-  "algorithm": "random_forest",
-  "features": {
-    "math": 85,
-    "science": 78,
-    "average": 80.25,
-    "attendance": 95
-  }
-}
-```
-
-**Response:**
-```json
-{
-  "id": 1,
-  "studentId": 1,
-  "prediction": "Tinggi",
-  "probability": 0.87,
-  "createdAt": "2024-01-15T10:30:00Z"
-}
-```
-
----
-
-### ⚠️ Early Warning Routes
-
-**Prefix:** `/warnings` | **Auth Required:** ✅ JWT Token
-
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | `/` | Ambil semua warning |
-| GET | `/student/:studentId` | Ambil warning siswa tertentu |
-| POST | `/` | Buat warning baru |
-| DELETE | `/:id` | Hapus warning |
-
-**Request Body - Create Warning:**
-```json
-{
-  "studentId": 1,
-  "type": "akademik",
-  "message": "Nilai matematika menurun signifikan",
-  "severity": "high"
-}
-```
-
----
-
-### 📊 Dashboard Routes
-
-**Prefix:** `/dashboard` | **Auth Required:** ✅ JWT Token
-
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | `/summary` | Overview statistik umum |
-| GET | `/class-stats` | Statistik per kelas |
-| GET | `/prediction-stats` | Statistik prediksi |
-
-**Response - Dashboard Summary:**
-```json
-{
-  "totalStudents": 150,
-  "totalTeachers": 12,
-  "highRiskStudents": 23,
-  "averageScore": 78.5,
-  "latestPredictions": []
-}
-```
-
----
-
-## 💾 Database Models
-
-### User Model
-```javascript
-{
-  id: Integer (Primary Key),
-  name: String,
-  email: String (Unique),
-  password: String (Hashed),
-  role: Enum ['guru', 'admin', 'ortu'],
-  createdAt: Timestamp,
-  updatedAt: Timestamp
-}
-```
-
-### Student Model
-```javascript
-{
-  id: Integer (Primary Key),
-  nama: String,
-  nisn: String (Unique),
-  email: String,
-  no_telepon: String,
-  kelas: String,
-  sekolah: String,
-  userId: Integer (Foreign Key - User),
-  createdAt: Timestamp,
-  updatedAt: Timestamp
-}
-```
-
-### Prediksi Model
-```javascript
-{
-  id: Integer (Primary Key),
-  studentId: Integer (Foreign Key - Student),
-  prediction: String,
-  probability: Float,
-  algorithm: String,
-  features: JSON,
-  createdAt: Timestamp,
-  updatedAt: Timestamp
-}
-```
-
-### EarlyWarning Model
-```javascript
-{
-  id: Integer (Primary Key),
-  studentId: Integer (Foreign Key - Student),
-  type: String,
-  message: String,
-  severity: Enum ['low', 'medium', 'high'],
-  isResolved: Boolean,
-  createdAt: Timestamp,
-  updatedAt: Timestamp
-}
-```
-
----
-
-## 🔒 Middleware & Authentication
-
-### Authentication Flow
-
-1. **Register** → User membuat akun baru
-2. **Login** → User login & menerima JWT token
-3. **Request dengan Token** → Include header `Authorization: Bearer <token>`
-4. **Middleware Verification** → Token divalidasi
-5. **Role Check** → Cek apakah user memiliki akses ke resource
-
-### JWT Token Structure
-
-Token JWT terdiri dari 3 bagian: `header.payload.signature`
-
-**Payload Example:**
-```json
-{
-  "id": 1,
-  "email": "john@example.com",
-  "role": "guru",
-  "iat": 1705315800,
-  "exp": 1706524800
-}
-```
-
-### Protected Endpoints
-
-Untuk mengakses endpoint yang memerlukan auth, include header:
-
-```
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-```
-
-### Role-Based Access Control
-
-- **Admin** → Akses penuh semua resource
-- **Guru** → Akses student data & predict
-- **Ortu** → Hanya akses data anak mereka
-
----
-
-## 🌱 Utility Scripts
-
-### Seed Users
-
-Buat user dummy untuk testing:
-
-```bash
-node seedUsers.js
-```
-
-**Default Users yang dibuat:**
-- Admin: `admin@snbpredict.com` / `admin123`
-- Guru: `guru@snbpredict.com` / `guru123`
-- Ortu: `ortu@snbpredict.com` / `ortu123`
-
-### Seed Students
-
-Buat student dummy untuk testing:
-
-```bash
-node seedStudents.js
-```
-
-Akan membuat 20+ siswa dummy dengan data akademik yang realistis.
-
----
-
-## 📝 Development Tips
-
-### Hot Reload
-```bash
-npm run dev
-```
-Gunakan mode ini untuk development. Server auto-restart saat file berubah.
-
-### Database Migration
-
-Jika perlu update schema database:
-
-1. Update model di `src/models/`
-2. Re-sync database (WARNING: akan drop existing data)
-
-```javascript
-// Di index.js atau seed script
-await sequelize.sync({ force: true });
-```
-
-### Testing API Endpoints
-
-Gunakan tools seperti:
-- **Postman** - GUI API testing
-- **Insomnia** - REST client
-- **curl** - Command line
-
-**Contoh curl:**
-```bash
-curl -X POST http://localhost:3000/api/v1/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"guru@snbpredict.com","password":"guru123"}'
-```
-
----
-
-## 🐛 Troubleshooting
-
-### Problem: Database Connection Error
-**Solution:**
-- Cek apakah PostgreSQL service running
-- Verifikasi DB credentials di `.env`
-- Pastikan database sudah di-create
-
-### Problem: CORS Error
-**Solution:**
-- Update `CORS_ORIGIN` di `.env` sesuai frontend URL
-- Default: `http://localhost:5173` (Vite)
-
-### Problem: JWT Token Invalid
-**Solution:**
-- Pastikan `JWT_SECRET` konsisten
-- Check token expiry: `JWT_EXPIRE` di `.env`
-- Re-login untuk get token baru
-
-### Problem: Port Already in Use
-**Solution:**
-```bash
-# Gunakan port berbeda
-PORT=3001 npm start
-```
-
----
-
-## 📞 Support & Contact
-
-Untuk pertanyaan atau issue, hubungi tim development atau buat issue di repository.
-
----
-
-## 📄 License
-
-SNBPredict © 2024. All rights reserved.
-
+Untuk mendeploy secara manual:
+1. Pastikan Anda telah menginstal Vercel CLI (`npm i -g vercel`).
+2. Jalankan perintah `vercel` di root folder backend.
+3. Konfigurasikan Environment Variables yang sesuai di dashboard Vercel Anda (khususnya `DATABASE_URL` atau `DB_*` serta `JWT_SECRET`).
