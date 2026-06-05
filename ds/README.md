@@ -2,15 +2,15 @@
 
 ## 📌 Deskripsi Proyek
 
-Proyek ini merupakan implementasi **A/B Testing menggunakan Python** pada data performa siswa. Tujuan utama proyek adalah menganalisis apakah terdapat perbedaan yang signifikan antara dua kelompok siswa berdasarkan metrik tertentu menggunakan pendekatan statistika inferensial.
+Proyek ini merupakan **analisis data performa siswa** dalam konteks persiapan SNBP (Seleksi Nasional Berdasarkan Prestasi). Tujuan utama proyek adalah mengeksplorasi faktor-faktor yang memengaruhi nilai ujian siswa — seperti jam belajar, jam tidur, penggunaan media sosial, dan produktivitas — serta menguji signifikansi pengaruhnya secara statistik melalui A/B Testing.
 
-Selain melakukan pengujian hipotesis, proyek ini juga mencakup proses:
+Proyek ini mencakup proses end-to-end berikut:
 
-- Data Cleaning dan Data Wrangling
-- Exploratory Data Analysis (EDA)
-- A/B Testing
-- Visualisasi Data
-- Dashboard Interaktif
+- **Data Cleaning & Data Wrangling** — pembersihan dan transformasi data mentah
+- **Exploratory Data Analysis (EDA)** — eksplorasi distribusi, korelasi, dan pola data
+- **A/B Testing** — pengujian hipotesis untuk menentukan faktor signifikan terhadap performa siswa
+- **Visualisasi Data** — grafik dan insight berbasis data
+- **Dashboard Interaktif** — aplikasi Streamlit untuk monitoring performa siswa secara real-time
 
 ---
 
@@ -28,30 +28,32 @@ Selain melakukan pengujian hipotesis, proyek ini juga mencakup proses:
 ## 📂 Struktur Proyek
 
 ```
-CAPSTONE_PROJECT/
+ds/
 │
-├── ds/
-│   ├── AB_Testing_Student_Performance.ipynb
-│   ├── ab_testing.py
-│   ├── dashboard.py
-│   ├── cleaned_data.csv
-│   ├── dataset.csv
-│   ├── Data_Dictionary.xlsx
-│   ├── Laporan teknis komprehensif.pdf
-│   └── README.md
+├── Dashboard/
+│   └── dashboard.py              # Dashboard interaktif (Streamlit)
+│
+├── Data/
+│   ├── dataset.csv               # Dataset mentah
+│   └── cleaned_data.csv          # Dataset yang telah dibersihkan
+│
+├── ab_testing.ipynb              # Notebook A/B Testing & EDA
+├── Data_Dictionary.xlsx          # Dokumentasi variabel dataset
+├── Laporan teknis komprehensif.pdf  # Laporan lengkap proyek
+└── README.md                     # Dokumentasi proyek
 ```
 
-### Penjelasan File
+### Penjelasan File & Folder
 
-| File | Deskripsi |
-|--------|-----------|
-| `ab_testing.py` | Script Python untuk menjalankan A/B Testing |
-| `dashboard.py` | Dashboard visualisasi hasil analisis |
-| `dataset.csv` | Dataset mentah |
-| `cleaned_data.csv` | Dataset yang telah melalui proses pembersihan |
+| File / Folder | Deskripsi |
+|---------------|-----------|
+| `Dashboard/dashboard.py` | Aplikasi dashboard interaktif berbasis Streamlit |
+| `Data/dataset.csv` | Dataset mentah sebelum pembersihan |
+| `Data/cleaned_data.csv` | Dataset yang telah melalui proses cleaning & wrangling |
+| `ab_testing.ipynb` | Jupyter Notebook utama berisi proses EDA, A/B Testing, dan visualisasi |
 | `Data_Dictionary.xlsx` | Dokumentasi atribut dan variabel dataset |
-| `Laporan teknis komprehensif.pdf` | Laporan lengkap proyek |
-| `README.md` | Dokumentasi proyek |
+| `Laporan teknis komprehensif.pdf` | Laporan teknis komprehensif proyek |
+| `README.md` | Dokumentasi proyek ini |
 
 ---
 
@@ -98,7 +100,7 @@ Buka Google Colab:
 https://colab.research.google.com/
 ```
 
-Kemudian jalankan:
+Kemudian jalankan notebook:
 
 ```
 ab_testing.ipynb
@@ -106,7 +108,7 @@ ab_testing.ipynb
 
 ---
 
-# Dashboard Interaktif
+## 📊 Dashboard Interaktif
 
 Aplikasi dashboard interaktif berbasis Streamlit untuk menganalisis performa akademik siswa, jam belajar, waktu tidur, dan pengaruhnya terhadap nilai ujian. Project ini dibuat untuk memenuhi tugas Capstone Project.
 
@@ -129,7 +131,7 @@ Data yang dianalisis dalam dashboard ini diambil langsung dari repositori GitHub
 Jalankan perintah berikut:
 
 ```bash
-streamlit run dashboard.py
+streamlit run Dashboard/dashboard.py
 ```
 
 Dashboard akan tersedia pada:
@@ -146,7 +148,7 @@ Jika ingin meng-online-kan dashboard ini secara gratis:
 3. Klik **New app**, lalu isi form sebagai berikut:
    - **Repository**: Nama repositori GitHub Anda.
    - **Branch**: `main` atau `master`.
-   - **Main file path**: `Capstone_Project/ds/dashboard.py`.
+   - **Main file path**: `Dashboard/dashboard.py`.
 4. Klik **Deploy!** dan tunggu beberapa menit hingga aplikasi selesai di-build.
 
 ---
