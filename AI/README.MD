@@ -4,11 +4,24 @@
 
 ### SNBPredict AI Engine
 
-SNBPredict AI Engine merupakan komponen Artificial Intelligence pada sistem **SNBPredict** yang bertugas melakukan prediksi performa akademik siswa serta menghasilkan insight naratif berbasis Generative AI.
+SNBPredict AI Engine merupakan komponen Artificial Intelligence pada sistem **SNBPredict** yang dirancang untuk membantu proses monitoring dan evaluasi performa akademik siswa.
 
-Sistem menggabungkan model Deep Learning Multi-Output Regression untuk memprediksi indikator performa akademik siswa dengan layanan Generative AI berbasis Google Gemini untuk menghasilkan interpretasi yang mudah dipahami oleh guru, orang tua, maupun pihak sekolah.
+Sistem memanfaatkan model Deep Learning Multi-Output Regression untuk memprediksi **Productivity Score** dan **Exam Score** berdasarkan kebiasaan belajar, aktivitas digital, kesehatan mental, serta faktor pendukung lainnya.
 
-AI Engine dikembangkan sebagai layanan terpisah yang dapat digunakan melalui REST API dan dideploy menggunakan Docker pada Hugging Face Spaces.
+Selain menghasilkan prediksi numerik, sistem juga mengintegrasikan Generative AI berbasis Google Gemini untuk mengubah hasil prediksi menjadi insight naratif yang mudah dipahami oleh guru, orang tua, dan pihak sekolah. Dengan pendekatan ini, pengguna tidak hanya memperoleh angka prediksi, tetapi juga rekomendasi dan interpretasi yang lebih informatif untuk mendukung pengambilan keputusan akademik.
+
+AI Engine dikembangkan sebagai layanan REST API yang dideploy menggunakan Docker pada Hugging Face Spaces.
+
+### Repository
+
+GitHub Repository:
+https://github.com/radityadiaz11/Capstone_Project
+
+Model Repository:
+https://huggingface.co/danielfahko/snbpredict-model
+
+Space Repository:
+https://huggingface.co/spaces/danielfahko/snbpredict-space
 
 ---
 
@@ -39,9 +52,7 @@ Input Student Data
  Narrative Insight
 ```
 
-Diagram di atas menggambarkan alur konseptual sistem AI dari proses prediksi hingga pembentukan insight naratif.
-
-Pada implementasinya, modul prediksi (`predict.py`) dan modul narasi (`narasi.py`) disediakan sebagai layanan API yang terpisah dan diintegrasikan melalui `main.py`.
+Diagram di atas menggambarkan alur konseptual pembentukan insight naratif. Pada implementasinya, layanan prediksi (predict.py) dan layanan generasi narasi (narasi.py) disediakan sebagai endpoint API yang terpisah dan diintegrasikan melalui main.py.
 
 ---
 
@@ -72,7 +83,7 @@ Pada implementasinya, modul prediksi (`predict.py`) dan modul narasi (`narasi.py
 
 * Docker
 * Hugging Face Spaces
-* Hugging Face Model Repository
+* Hugging Face Model Hub
 
 ### Development Environment
 
@@ -81,14 +92,79 @@ Pada implementasinya, modul prediksi (`predict.py`) dan modul narasi (`narasi.py
 
 ---
 
-## 4. Project Structure
+## 4. Environment Setup
 
-### Model Repository (`snbpredict-model`)
+Ikuti langkah berikut untuk menyiapkan environment dan menjalankan SNBPredict AI Engine secara lokal.
 
-Repository ini menyimpan seluruh artefak hasil pelatihan model yang digunakan pada proses inferensi.
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/radityadiaz11/Capstone_Project.git
+cd Capstone_Project
+cd "AI/HF SPACE REPOSITORY"
+```
+
+### 2. Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+Aktifkan virtual environment:
+
+```bash
+venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure Gemini API Key
+
+SNBPredict AI Engine menggunakan Google Gemini API untuk menghasilkan insight naratif. Oleh karena itu, pengguna perlu menyiapkan API Key milik masing-masing sebelum menjalankan aplikasi.
+
+Command Prompt (CMD):
+
+```cmd
+set GEMINI_API_KEY=your_api_key
+```
+
+PowerShell:
+
+```powershell
+$env:GEMINI_API_KEY="your_api_key"
+```
+
+### 5. Verify Installation
+
+```bash
+pip list
+```
+
+---
+
+## 5. Project Structure
+
+Struktur direktori AI pada repository Capstone Project ditunjukkan sebagai berikut:
 
 ```text
-snbpredict-model/
+Capstone_Project/
+└── AI/
+    ├── HF MODEL REPOSITORY/
+    ├── HF SPACE REPOSITORY/
+    ├── NOTEBOOK/
+    └── README.md
+```
+
+### HF MODEL REPOSITORY
+
+Folder ini menyimpan seluruh artefak hasil pelatihan model yang digunakan pada proses inferensi.
+
+```text
+HF MODEL REPOSITORY/
 │
 ├── student_multi_predictor.keras
 ├── best_model.keras
@@ -112,26 +188,12 @@ snbpredict-model/
 └── actual_vs_predicted.png
 ```
 
-Keterangan:
+### HF SPACE REPOSITORY
 
-* `student_multi_predictor.keras` : model utama hasil training.
-* `best_model.keras` : checkpoint model terbaik selama proses pelatihan.
-* `feat_scaler.pkl` : scaler fitur input.
-* `tgt_scaler.pkl` : scaler target output.
-* `le_gender.pkl` : encoder fitur gender.
-* `le_internet.pkl` : encoder fitur kualitas internet.
-* `saved_model.pb` dan folder `variables/` : artefak TensorFlow SavedModel untuk deployment.
-* `history.json` : riwayat proses training.
-* `meta.json` : metadata model dan konfigurasi fitur.
-* `training_curves.png` : visualisasi kurva pelatihan.
-* `actual_vs_predicted.png` : visualisasi hasil evaluasi model.
-
-### Space Repository (`snbpredict-space`)
-
-Repository ini berisi layanan AI yang dijalankan pada Hugging Face Spaces.
+Folder ini berisi layanan AI yang dijalankan pada Hugging Face Spaces.
 
 ```text
-snbpredict-space/
+HF SPACE REPOSITORY/
 │
 ├── main.py
 ├── predict.py
@@ -143,19 +205,20 @@ snbpredict-space/
 └── Dockerfile
 ```
 
-Keterangan:
+### NOTEBOOK
 
-* `main.py` : entry point aplikasi FastAPI.
-* `predict.py` : layanan prediksi berbasis Deep Learning.
-* `narasi.py` : layanan generasi narasi menggunakan Gemini API.
-* `interpreter.py` : modul interpretasi hasil prediksi.
-* `prompt_engine.py` : generator prompt untuk berbagai persona pengguna.
-* `requirements.txt` : daftar dependensi proyek.
-* `Dockerfile` : konfigurasi container deployment.
+Folder notebook berisi proses pengembangan model dan Generative AI.
+
+```text
+NOTEBOOK/
+│
+├── student_performance_predictor.ipynb
+└── CapstoneGenAI.ipynb
+```
 
 ---
 
-## 5. Deep Learning Model
+## 6. Deep Learning Model
 
 ### Objective
 
@@ -174,6 +237,42 @@ Model dirancang untuk memprediksi dua indikator utama performa akademik siswa me
 * Custom Training Loop menggunakan `tf.GradientTape`
 * Production-ready SavedModel dan `.keras` artifacts
 
+### Model Architecture
+
+Model menggunakan pendekatan Multi-Output Regression dengan arsitektur shared representation dan task-specific heads. Bagian awal model digunakan untuk mengekstraksi representasi umum dari seluruh fitur input, kemudian dipisahkan menjadi dua cabang untuk memprediksi Productivity Score dan Exam Score.
+
+```text
+Input (13 features)
+      │
+      ▼
+  Stem: Dense(256) → BN → GELU
+      │
+  ResidualBlock(256)  ── shared representation
+  ResidualBlock(128)
+  ResidualBlock(64)
+      │
+  ┌───┴───┐
+  │       │
+Head-P  Head-E          (task-specific branches)
+ResBlock(64)  ResBlock(64)
+ResBlock(32)  ResBlock(32)
+Dense(16)     Dense(16)
+  │               │
+Dense(1,sigmoid)  Dense(1,sigmoid)
+  │               │
+productivity_score  exam_score
+        └────┬────┘
+          Concatenate → Output (2,)
+```
+
+Keterangan:
+
+* Shared Trunk digunakan untuk mempelajari representasi umum dari seluruh fitur siswa.
+* Head-P bertugas memprediksi Productivity Score.
+* Head-E bertugas memprediksi Exam Score.
+* Residual Block digunakan untuk menjaga stabilitas proses pelatihan dan meningkatkan kemampuan representasi model.
+* Concatenate Layer menggabungkan kedua output menjadi satu tensor keluaran dengan dua target prediksi.
+
 ### Dataset Information
 
 | Attribute        | Value                          |
@@ -187,8 +286,6 @@ Model dirancang untuk memprediksi dua indikator utama performa akademik siswa me
 | Test Split       | 765                            |
 
 ### Input Features
-
-Model menerima 13 fitur input:
 
 * Age
 * Gender
@@ -206,20 +303,18 @@ Model menerima 13 fitur input:
 
 ### Output Targets
 
-Model menghasilkan dua nilai prediksi:
-
 * Productivity Score (0–100)
 * Exam Score (0–100)
 
 ---
 
-## 6. Generative AI Pipeline
+## 7. Generative AI Pipeline
 
 ### Interpreter Layer
 
 Interpreter berfungsi mengubah data siswa dan hasil prediksi menjadi representasi yang lebih mudah dipahami melalui proses kategorisasi dan pelabelan kondisi siswa.
 
-Beberapa aspek yang diinterpretasikan meliputi:
+Aspek yang diinterpretasikan meliputi:
 
 * Intensitas belajar
 * Tingkat distraksi digital
@@ -232,7 +327,7 @@ Beberapa aspek yang diinterpretasikan meliputi:
 
 ### Prompt Engine
 
-Prompt Engine bertugas membangun prompt terstruktur berdasarkan hasil interpretasi data siswa.
+Prompt Engine membangun prompt terstruktur berdasarkan hasil interpretasi data siswa.
 
 Sistem menyediakan tiga persona utama:
 
@@ -240,15 +335,13 @@ Sistem menyediakan tiga persona utama:
 * Orang Tua
 * Admin/Kepala Sekolah
 
-Setiap persona memperoleh prompt yang disesuaikan dengan kebutuhan informasi dan tingkat pengambilan keputusan masing-masing.
-
 ### Gemini Integration
 
-Prompt yang telah dibangun kemudian dikirim ke Google Gemini API untuk menghasilkan narasi otomatis dalam bahasa natural yang mudah dipahami oleh pengguna akhir.
+Prompt yang telah dibangun dikirim ke Google Gemini API untuk menghasilkan narasi otomatis dalam bahasa natural yang mudah dipahami pengguna.
 
 ---
 
-## 7. Inference Flow
+## 8. Inference Flow
 
 ```text
 User Input
@@ -286,27 +379,18 @@ Final Narrative
 
 ---
 
-## 8. Running Locally
+## 9. API Endpoints
 
-### Install Dependencies
+| Method | Endpoint         | Description                                   |
+| ------ | ---------------- | --------------------------------------------- |
+| POST   | `/predict`       | Generate prediction for a single student      |
+| POST   | `/predict/batch` | Generate predictions for multiple students    |
+| POST   | `/narasi/guru`   | Generate narrative insight for teachers       |
+| POST   | `/narasi/admin`  | Generate executive summary for administrators |
+| POST   | `/narasi/ortu`   | Generate narrative insight for parents        |
+| GET    | `/health`        | Check API and Gemini service health           |
 
-```bash
-pip install -r requirements.txt
-```
-
-### Configure Environment Variable
-
-```bash
-export GEMINI_API_KEY="your_api_key"
-```
-
-### Run FastAPI Service
-
-```bash
-uvicorn main:app --host 0.0.0.0 --port 7860
-```
-
-Setelah server berjalan, dokumentasi API dapat diakses melalui:
+Local API Documentation:
 
 ```text
 http://localhost:7860/docs
@@ -314,7 +398,29 @@ http://localhost:7860/docs
 
 ---
 
-## 9. Docker Deployment
+## 10. Running Locally
+
+Jalankan layanan FastAPI menggunakan perintah berikut:
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port 7860
+```
+
+Setelah server berjalan:
+
+```text
+http://localhost:7860
+```
+
+Dokumentasi API:
+
+```text
+http://localhost:7860/docs
+```
+
+---
+
+## 11. Docker Deployment
 
 ### Build Image
 
@@ -330,31 +436,87 @@ docker run -p 7860:7860 snbpredict-ai
 
 ---
 
-## 10. Hugging Face Deployment
+## 12. Hugging Face Deployment
+
+SNBPredict AI Engine menggunakan dua repository terpisah pada Hugging Face untuk memisahkan artefak model dan layanan inferensi.
 
 ### Model Repository
 
-Model Repository digunakan untuk menyimpan seluruh artefak hasil pelatihan model, termasuk:
+Model dapat diakses melalui:
+
+https://huggingface.co/danielfahko/snbpredict-model
+
+Model dimuat pada layanan inferensi melalui artefak yang tersimpan pada Model Repository dan digunakan oleh modul `predict.py` selama proses prediksi.
+
+Repository ini menyimpan:
 
 * Deep Learning Model
 * Feature Scaler
 * Target Scaler
 * Label Encoder
 * Metadata Model
+* Training History
+* Evaluation Artifacts
+
+### Model Download
+
+Selain tersedia pada Hugging Face Model Repository, model juga dapat diunduh melalui Google Drive berikut:
+
+https://drive.google.com/drive/folders/13kN8e_wE4PgnNHSPTU05gW0NIrMQtPuf?usp=sharing
 
 ### Space Repository
 
-Space Repository digunakan untuk menjalankan layanan inferensi dan Generative AI yang terdiri atas:
+Repository layanan:
+
+```text
+https://huggingface.co/spaces/danielfahko/snbpredict-space
+```
+
+Repository ini menjalankan:
 
 * FastAPI Service
 * Prediction Service
 * Narrative Generation Service
 * Docker Configuration
-* Hugging Face Deployment Configuration
+
+### Deployment Workflow
+
+```text
+User Input
+     │
+     ▼
+ Hugging Face Space
+     │
+     ▼
+ Load Model Repository
+     │
+     ▼
+ Prediction Service
+     │
+     ▼
+ Generative AI Pipeline
+     │
+     ▼
+ Narrative Insight
+```
+
+### Public API Access
+
+Base URL:
+
+```text
+https://danielfahko-snbpredict-space.hf.space
+```
+
+Swagger Documentation:
+
+```text
+https://danielfahko-snbpredict-space.hf.space/docs
+```
 
 ---
 
-## 11. Example Output
+## 13. Example Output
 
 ### Prediction Output
 
@@ -373,20 +535,19 @@ Berdasarkan hasil analisis, siswa menunjukkan kebiasaan belajar yang cukup baik 
 
 ---
 
-## 12. AI Engineer Contributions
+## 14. AI Engineer Contributions
 
 ### RC. Nurul A'la
 
-* Developed the Generative AI pipeline for narrative generation.
-* Designed prompt engineering strategies for insight generation.
-* Built prediction interpretation logic and narrative workflows.
-* Integrated Gemini API for automated explanation and recommendation generation.
+* Mengembangkan pipeline Generative AI untuk menghasilkan insight naratif berdasarkan data dan hasil prediksi siswa.
+* Merancang strategi prompt engineering untuk menyesuaikan narasi dengan kebutuhan berbagai pengguna.
+* Membangun modul interpretasi hasil prediksi dan alur pembentukan narasi otomatis.
+* Mengintegrasikan Google Gemini API untuk menghasilkan penjelasan dan rekomendasi akademik secara otomatis.
 
 ### Daniel Fahlevi Bako
 
-* Developed the Deep Learning prediction model.
-* Implemented model training and evaluation workflows.
-* Built prediction and inference services.
-* Integrated Machine Learning and Generative AI components into a unified AI service.
-* Managed Docker containerization and Hugging Face deployment.
-
+* Mengembangkan model Deep Learning untuk prediksi performa akademik siswa.
+* Mengimplementasikan proses pelatihan, evaluasi, dan validasi model.
+* Membangun layanan prediksi dan inferensi berbasis API.
+* Mengintegrasikan komponen Machine Learning dan Generative AI ke dalam satu layanan AI yang terpadu.
+* Mengelola containerization menggunakan Docker serta proses deployment pada Hugging Face.
