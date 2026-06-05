@@ -1,0 +1,9 @@
+tensorflow==2.20.0
+fastapi
+uvicorn[standard]
+pydantic
+joblib
+numpy
+scikit-learn
+google-genai
+huggingface_hub
