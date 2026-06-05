@@ -1,0 +1,31 @@
+{
+  "feature_cols": [
+    "age",
+    "gender",
+    "study_hours",
+    "self_study_hours",
+    "online_classes_hours",
+    "social_media_hours",
+    "gaming_hours",
+    "sleep_hours",
+    "screen_time_hours",
+    "internet_quality",
+    "mental_health_score",
+    "focus_index",
+    "burnout_level"
+  ],
+  "target_cols": [
+    "productivity_score",
+    "exam_score"
+  ],
+  "gender_classes": [
+    "Female",
+    "Male",
+    "Other"
+  ],
+  "internet_classes": [
+    "Average",
+    "Good",
+    "Poor"
+  ]
+}
