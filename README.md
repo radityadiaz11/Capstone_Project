@@ -75,41 +75,49 @@ Aplikasi akan terbuka otomatis di browser pada `http://localhost:8501`.
 
 ---
 
-## 🤖 Kontribusi: Artificial Intelligence
+# 🤖 Kontribusi: Artificial Intelligence
 
 **Anggota:** RC. Nurul A'la · Daniel Fahlevi Bako
 
 ### Overview
 
-SNBPredict AI Engine menggabungkan Deep Learning Multi-Output Regression untuk memprediksi performa akademik siswa dengan Generative AI (Google Gemini) untuk menghasilkan insight naratif. Model ini dikembangkan dan didemonstrasikan dalam bentuk Jupyter Notebooks.
+SNBPredict AI Engine menggabungkan Deep Learning Multi-Output Regression untuk memprediksi performa akademik siswa dengan Generative AI (Google Gemini) untuk menghasilkan insight naratif yang mudah dipahami oleh guru, orang tua, dan pihak sekolah. Model dikembangkan dan didemonstrasikan dalam bentuk Jupyter Notebook.
 
 ### AI Architecture
 
-```
-Input → Deep Learning Model (Notebook) → Prediction → Prompt Engine → Gemini API → Narrative Insight
-```
+Input Student Data → Deep Learning Model → Prediction Result → Interpreter → Prompt Engine → Gemini API → Narrative Insight
 
 ### Tools & Library
 
-| Kategori       | Tools                                              |
-|----------------|-----------------------------------------------------|
-| Deep Learning  | Python, TensorFlow, Keras, NumPy, Pandas, Scikit-Learn |
-| Generative AI  | Google Gemini API, Prompt Engineering               |
-| IDE            | Jupyter Notebook (.ipynb)                           |
+| Kategori                | Tools                                                  |
+| ----------------------- | ------------------------------------------------------ |
+| Deep Learning           | Python, TensorFlow, Keras, NumPy, Pandas, Scikit-Learn |
+| Generative AI           | Google Gemini API, Prompt Engineering                  |
+| Development Environment | Jupyter Notebook (.ipynb)                              |
+| Model Repository        | Hugging Face                                           |
 
 ### Deep Learning Model
 
 **File:** `student_performance_predictor.ipynb`
-**Task:** Multi-Output Regression → memprediksi **Productivity Score** dan **Exam Score** (0–100).
-**Arsitektur:** TensorFlow Model Subclassing, Residual Neural Network.
-**Dataset:** 5,100 records | 13 fitur | Train: 3,570 | Val: 765 | Test: 765
-**Input Features (13):** Age, Gender, Study Hours, dsb.
+
+**Task:** Multi-Output Regression untuk memprediksi **Productivity Score** dan **Exam Score** (0–100).
+
+**Arsitektur:** TensorFlow Model Subclassing dengan Residual Neural Network.
+
+**Dataset:** 5.100 records | 13 fitur | Train: 3.570 | Validation: 765 | Test: 765.
 
 ### Generative AI Pipeline
 
 **File:** `CapstoneGenerativeAI.ipynb`
-1. **Interpreter** — Mengkategorikan kondisi siswa berdasarkan fitur dan prediksi.
-2. **Gemini Integration** — Menghasilkan narasi otomatis dalam bahasa natural untuk Guru, Orang Tua, dan Admin.
+
+* **Interpreter** — Mengkategorikan kondisi siswa berdasarkan fitur dan hasil prediksi.
+* **Prompt Engineering** — Menyusun konteks analisis sesuai kebutuhan pengguna.
+* **Gemini Integration** — Menghasilkan narasi otomatis dalam bahasa natural untuk Guru, Orang Tua, dan Admin.
+
+### Model Repository
+
+* Hugging Face: https://huggingface.co/danielfahko/snbpredict-model
+* Google Drive: [https://drive.google.com/drive/folders/13kN8e_wE4PgnNHSPTU05gW0NIrMQtPuf?usp=sharing]
 
 ### Cara Menjalankan
 
@@ -122,24 +130,34 @@ pip install tensorflow pandas numpy scikit-learn jupyter google-generativeai
 # Buka Jupyter Notebook
 jupyter notebook
 ```
-> **Catatan:** Jangan lupa siapkan dan masukkan `GEMINI_API_KEY` di dalam notebook `CapstoneGenerativeAI.ipynb` saat menjalankan script Generative AI.
+
+Buka notebook:
+
+* `student_performance_predictor.ipynb`
+* `CapstoneGenerativeAI.ipynb`
+
+**Catatan:** Siapkan dan masukkan `GEMINI_API_KEY` pada notebook Generative AI sebelum menjalankan proses generasi narasi.
 
 ### Hasil
 
-Prediction Output (Contoh):
+**Prediction Output (Contoh)**
+
 ```json
-{ "productivity_score": 84.27, "exam_score": 78.51 }
+{
+  "productivity_score": 84.27,
+  "exam_score": 78.51
+}
 ```
 
-Narrative Output:
-```
-Berdasarkan hasil analisis, siswa menunjukkan kebiasaan belajar yang cukup baik dengan tingkat fokus yang relatif stabil. Disarankan untuk mempertahankan konsistensi belajar serta melakukan pemantauan berkala terhadap perkembangan akademik siswa.
-```
+**Narrative Output**
+
+> Berdasarkan hasil analisis, siswa menunjukkan kebiasaan belajar yang cukup baik dengan tingkat fokus yang relatif stabil. Disarankan untuk mempertahankan konsistensi belajar serta melakukan pemantauan berkala terhadap perkembangan akademik siswa.
 
 ### Kontribusi AI Engineer
 
-- **RC. Nurul A'la** — Generative AI pipeline, prompt engineering, interpretasi narasi, integrasi Gemini API.
-- **Daniel Fahlevi Bako** — Deep Learning model, training & evaluasi, prediction service, integrasi ML+GenAI, Docker & HF deployment.
+**RC. Nurul A'la** — Pengembangan pipeline Generative AI, prompt engineering, interpretasi hasil prediksi, dan integrasi Google Gemini API.
+
+**Daniel Fahlevi Bako** — Pengembangan model Deep Learning, proses training dan evaluasi model, pengembangan pipeline inferensi, serta integrasi model prediksi dengan Generative AI.
 
 ---
 
