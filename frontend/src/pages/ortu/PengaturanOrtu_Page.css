@@ -1,0 +1,526 @@
+/* ============================================
+   PengaturanOrtu_Page.css
+   Standalone CSS for PengaturanOrtu_Page.jsx
+   ============================================ */
+
+/* --- Page Shell Wrapper --- */
+.po-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background-color: #f5f3ef;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: #334155;
+  box-sizing: border-box;
+}
+
+/* --- Mobile Header --- */
+.po-mobile-header {
+  display: none;
+}
+
+/* --- Sidebar --- */
+.po-sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid rgba(229, 231, 235, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  z-index: 100;
+  transition: transform 0.2s ease-in-out;
+}
+
+.po-brand {
+  margin-bottom: 24px;
+}
+
+.po-brand-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.po-brand-sub {
+  font-size: 10px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin: 2px 0 0 0;
+}
+
+/* Role Badge - Teal #0D7A7A */
+.po-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #e6f2f2;
+  color: #0D7A7A;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid #bde0e0;
+  margin-top: 12px;
+  margin-bottom: 32px;
+}
+
+.po-role-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #0D7A7A;
+}
+
+/* Sidebar Navigation */
+.po-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.po-nav-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.po-nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  background: transparent;
+  color: #475569;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+  box-sizing: border-box;
+  border-left: 4px solid transparent;
+}
+
+.po-nav-item:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* Active State Blue #185FA5 with vertical indicator bar */
+.po-nav-item.active {
+  background-color: #eff5fb;
+  color: #185FA5;
+  border-left: 4px solid #185FA5;
+  border-radius: 0 12px 12px 0;
+}
+
+.po-nav-icon {
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sidebar Bottom Area */
+.po-sidebar-bottom {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Red Notification Badge #A32D2D */
+.po-notif-badge {
+  background-color: #A32D2D;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  margin-left: auto;
+}
+
+.po-nav-logout {
+  color: #dc2626;
+}
+
+.po-nav-logout:hover {
+  background-color: #fef2f2;
+  color: #b91c1c;
+}
+
+/* --- Main content pane --- */
+.po-main {
+  flex-grow: 1;
+  margin-left: 240px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* --- Sticky Topbar --- */
+.po-topbar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(245, 243, 239, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 90;
+  padding: 20px 32px;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.po-page-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.po-page-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.po-page-sub {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin: 2px 0 0 0;
+}
+
+/* User profile section */
+.po-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.po-profile-text {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.po-profile-name {
+  font-weight: 800;
+  font-size: 14px;
+  color: #1e293b;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.po-profile-role {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.po-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eff5fb;
+  color: #185FA5;
+  font-weight: 800;
+  font-size: 14px;
+  border: 1px solid #d2e2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* --- Content Container --- */
+.po-content {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 1100px;
+  box-sizing: border-box;
+}
+
+/* --- 2-Column Settings Grid --- */
+.po-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* --- Card Styles --- */
+.po-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  border-radius: 16px;
+  padding: 28px 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+}
+
+.po-card-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 24px 0;
+}
+
+/* Profile Card specific details */
+.po-avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.po-profile-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #e6f2f2;
+  color: #0D7A7A;
+  font-weight: 800;
+  font-size: 18px;
+  border: 1px solid #bde0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.po-profile-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.po-profile-name-full {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.po-profile-desc {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Details list with border separators */
+.po-details-list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.po-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.po-detail-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.po-detail-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.po-detail-value.bold {
+  font-weight: 800;
+}
+
+.po-email-link {
+  color: #185FA5;
+  text-decoration: none;
+}
+
+.po-email-link:hover {
+  text-decoration: underline;
+}
+
+.po-edit-btn {
+  padding: 8px 20px;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.po-edit-btn:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+}
+
+/* Preferences Card specific details */
+.po-prefs-list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.po-pref-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.po-pref-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+}
+
+/* Interactive pill badges styled as buttons */
+.po-toggle-badge {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.po-toggle-badge.active {
+  background-color: #e6f2f2;
+  color: #0D7A7A;
+}
+
+.po-toggle-badge.active:hover {
+  background-color: #d1e8e8;
+}
+
+.po-toggle-badge.inactive {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+}
+
+.po-toggle-badge.inactive:hover {
+  background-color: #e2e8f0;
+}
+
+.po-prefs-footer {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+/* --- Responsive Media Queries --- */
+@media (max-width: 1024px) {
+  .po-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .po-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 110;
+  }
+
+  .po-mobile-brand-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .po-mobile-brand-sub {
+    font-size: 9px;
+    color: #94a3b8;
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  .po-mobile-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #475569;
+    padding: 4px;
+  }
+
+  .po-sidebar {
+    width: 100%;
+    height: calc(100vh - 58px);
+    top: 58px;
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+    transform: translateX(-100%);
+    padding: 20px;
+  }
+
+  .po-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .po-main {
+    margin-left: 0;
+  }
+
+  .po-topbar {
+    padding: 16px 24px;
+  }
+
+  .po-content {
+    padding: 24px;
+  }
+
+  .po-card {
+    padding: 20px 24px;
+  }
+}

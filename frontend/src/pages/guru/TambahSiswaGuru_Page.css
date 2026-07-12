@@ -1,0 +1,9 @@
+/* ===================================================
+   TAMBAH SISWA — GURU
+   TambahSiswaGuru_Page.css
+   =================================================== */
+
+@import './DashboardPage.css';
+@import '../admin/RekapKelas_Page.css';
+
+/* Anda dapat menambahkan gaya khusus untuk halaman Tambah Siswa Guru di sini */
