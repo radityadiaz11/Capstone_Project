@@ -116,22 +116,21 @@ function EksporData_Page() {
         if (id === 'keluar') { localStorage.removeItem('token'); localStorage.removeItem('role'); navigate('/', { replace: true }); }
     };
 
-    const handleExport = (type) => {
+    const handleExport = async (type) => {
         setLoadingItem(type);
-        setTimeout(() => {
-            setLoadingItem(null);
-            if (type === 'excel') {
-                api.get('/students')
-                    .then(res => {
-                        let studentsData = [];
-                        if (res.data && res.data.data) {
-                            studentsData = res.data.data;
-                            if (profile.mengampu_kelas) {
-                                studentsData = studentsData.filter(s => s.kelas === profile.mengampu_kelas);
-                            }
-                        }
+        
+        if (type === 'excel') {
+            try {
+                const res = await api.get('/students');
+                let studentsData = [];
+                if (res.data && res.data.data) {
+                    studentsData = res.data.data;
+                    if (profile.mengampu_kelas) {
+                        studentsData = studentsData.filter(s => s.kelas === profile.mengampu_kelas);
+                    }
+                }
 
-                        let tableHtml = `<html xmlns:x="urn:schemas-microsoft-com:office:excel">
+                let tableHtml = `<html xmlns:x="urn:schemas-microsoft-com:office:excel">
   <head>
     <meta charset="utf-8">
     <style>
@@ -156,9 +155,9 @@ function EksporData_Page() {
       </thead>
       <tbody>`;
 
-                        studentsData.forEach(student => {
-                            const nama = student.nama || "Tanpa Nama";
-                            tableHtml += `
+                studentsData.forEach(student => {
+                    const nama = student.nama || "Tanpa Nama";
+                    tableHtml += `
         <tr>
           <td>${student.student_id}</td>
           <td>${nama}</td>
@@ -170,45 +169,47 @@ function EksporData_Page() {
           <td>${student.eng_score || 0}</td>
           <td>${student.exam_score || 0}</td>
         </tr>`;
-                        });
+                });
 
-                        tableHtml += `
+                tableHtml += `
       </tbody>
     </table>
   </body>
 </html>`;
 
-                        const blob = new Blob([tableHtml], { type: "application/vnd.ms-excel" });
-                        const url = URL.createObjectURL(blob);
-                        const link = document.createElement("a");
-                        link.setAttribute("href", url);
-                        link.setAttribute("download", "Data_Nilai_Seluruh_Siswa.xls");
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        setTimeout(() => URL.revokeObjectURL(url), 100);
+                const blob = new Blob([tableHtml], { type: "application/vnd.ms-excel" });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.setAttribute("href", url);
+                link.setAttribute("download", "Data_Nilai_Seluruh_Siswa.xls");
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => URL.revokeObjectURL(url), 100);
 
-                        const dateStr = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-                        const timeStr = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-                        setRiwayatEkspor(prev => [
-                            { label: `Data Nilai (${dateStr} ${timeStr})`, type: 'Excel', typeClass: 'fmt-excel' },
-                            ...prev
-                        ]);
-                    })
-                    .catch(err => {
-                        console.error('Error fetching students for export:', err);
-                        alert('Gagal mengambil data untuk diekspor.');
-                    });
-            } else if (type === 'pdf') {
                 const dateStr = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
                 const timeStr = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
                 setRiwayatEkspor(prev => [
-                    { label: `Laporan Kesiapan (${dateStr} ${timeStr})`, type: 'PDF', typeClass: 'fmt-pdf' },
+                    { label: `Data Nilai (${dateStr} ${timeStr})`, type: 'Excel', typeClass: 'fmt-excel' },
                     ...prev
                 ]);
-                window.print();
+            } catch (err) {
+                console.error('Error fetching students for export:', err);
+                alert('Gagal mengambil data untuk diekspor.');
             }
-        }, 1800);
+            setLoadingItem(null);
+        } else if (type === 'pdf') {
+            const dateStr = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            const timeStr = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            setRiwayatEkspor(prev => [
+                { label: `Laporan Kesiapan (${dateStr} ${timeStr})`, type: 'PDF', typeClass: 'fmt-pdf' },
+                ...prev
+            ]);
+            setTimeout(() => {
+                setLoadingItem(null);
+                window.print();
+            }, 300);
+        }
     };
 
     return (

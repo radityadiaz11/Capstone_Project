@@ -159,8 +159,7 @@
 @media print {
   .db-sidebar,
   .db-topbar,
-  .ekspor-content-wrapper,
-  .db-shell {
+  .ekspor-content-wrapper {
     display: none !important;
   }
 
