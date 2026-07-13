@@ -69,10 +69,10 @@ const predictStudent = async (req, res) => {
       isSimulated = true;
       const score = parseFloat(student.exam_score) || 0;
       hasilPrediksi = {
-        prediksi_nilai: parseFloat((score * 1.05).toFixed(2)),
-        tren:           score > 30 ? 'naik' : score > 15 ? 'stabil' : 'turun',
-        level_risiko:   score < 10 ? 'tinggi' : score < 20 ? 'sedang' : 'rendah',
-        confidence:     0.85
+        prediksi_nilai: Math.min(100, parseFloat((score * 1.05).toFixed(2))),
+        tren:           score > 80 ? 'naik' : score >= 65 ? 'stabil' : 'turun',
+        level_risiko:   score < 60 ? 'tinggi' : score < 75 ? 'sedang' : 'rendah',
+        confidence:     parseFloat((0.80 + ((score % 15) / 100)).toFixed(2))
       };
     }
 
@@ -192,10 +192,10 @@ const predictBatch = async (req, res) => {
       for (const student of students) {
         const score = parseFloat(student.exam_score) || 0;
         const pred = {
-          prediksi_nilai: parseFloat((score * 1.05).toFixed(2)),
-          tren:           score > 30 ? 'naik' : score > 15 ? 'stabil' : 'turun',
-          level_risiko:   score < 10 ? 'tinggi' : score < 20 ? 'sedang' : 'rendah',
-          confidence:     0.85
+          prediksi_nilai: Math.min(100, parseFloat((score * 1.05).toFixed(2))),
+          tren:           score > 80 ? 'naik' : score >= 65 ? 'stabil' : 'turun',
+          level_risiko:   score < 60 ? 'tinggi' : score < 75 ? 'sedang' : 'rendah',
+          confidence:     parseFloat((0.80 + ((score % 15) / 100)).toFixed(2))
         };
 
         if (isUsingDatabase()) {
