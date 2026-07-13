@@ -138,7 +138,8 @@ const PrediksiSiswa_Page = () => {
         if (studentsRes.data.success) {
           const mapped = studentsRes.data.data.map(s => {
             const history = s.riwayatPrediksi || [];
-            const latestPred = history.length > 0 ? history[history.length - 1] : null;
+            // Jangan load dari riwayat agar user harus menekan tombol prediksi
+            const latestPred = null;
 
             const score = s.exam_score || 0;
 

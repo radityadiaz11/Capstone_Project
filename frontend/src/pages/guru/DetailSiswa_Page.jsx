@@ -157,9 +157,10 @@ const DetailSiswa_Page = () => {
 
           // If student has warnings/predictions, use latest
           const data = res.data.data;
-          if (data.riwayatPrediksi && data.riwayatPrediksi.length > 0) {
-            setPrediction(data.riwayatPrediksi[data.riwayatPrediksi.length - 1]);
-          }
+          // Jangan muat otomatis dari history agar harus tekan tombol
+          // if (data.riwayatPrediksi && data.riwayatPrediksi.length > 0) {
+          //   setPrediction(data.riwayatPrediksi[data.riwayatPrediksi.length - 1]);
+          // }
         }
       } catch (error) {
         console.error('Error fetching student:', error);
@@ -358,7 +359,7 @@ const DetailSiswa_Page = () => {
                   <span className="ai-pred-label">Confidence</span>
                   <span className="ai-pred-value" style={{ color: '#7c3aed' }}>
                     {prediction.confidence != null ? (
-                      prediction.confidence > 0 ? `${(prediction.confidence * 100).toFixed(0)}%` : '—'
+                      prediction.confidence >= 0 ? `${(prediction.confidence * 100).toFixed(0)}%` : '—'
                     ) : '—'}
                   </span>
                 </div>
