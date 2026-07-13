@@ -157,10 +157,11 @@ const DetailSiswa_Page = () => {
 
           // If student has warnings/predictions, use latest
           const data = res.data.data;
-          // Jangan muat otomatis dari history agar harus tekan tombol
-          // if (data.riwayatPrediksi && data.riwayatPrediksi.length > 0) {
-          //   setPrediction(data.riwayatPrediksi[data.riwayatPrediksi.length - 1]);
-          // }
+          // Gunakan sessionStorage agar persist antar halaman tapi reset saat logout
+          const sessionPreds = JSON.parse(sessionStorage.getItem('session_predictions') || '{}');
+          if (sessionPreds[studentId]) {
+            setPrediction(sessionPreds[studentId]);
+          }
         }
       } catch (error) {
         console.error('Error fetching student:', error);
@@ -180,6 +181,9 @@ const DetailSiswa_Page = () => {
       const res = await api.post('/predict', { student_id: studentId });
       if (res.data.success) {
         setPrediction(res.data.data);
+        const sessionPreds = JSON.parse(sessionStorage.getItem('session_predictions') || '{}');
+        sessionPreds[studentId] = res.data.data;
+        sessionStorage.setItem('session_predictions', JSON.stringify(sessionPreds));
       }
     } catch (error) {
       console.error('Error predicting:', error);
@@ -220,6 +224,7 @@ const DetailSiswa_Page = () => {
     if (id === 'keluar') {
       localStorage.removeItem('token');
       localStorage.removeItem('role');
+      sessionStorage.removeItem('session_predictions');
       navigate('/', { replace: true });
     }
   };
@@ -310,14 +315,20 @@ const DetailSiswa_Page = () => {
               <button
                 className="predict-batch-btn"
                 onClick={handlePredict}
-                disabled={predicting}
-                style={{ fontSize: '13px', padding: '8px 18px' }}
+                disabled={predicting || prediction !== null}
+                style={{ 
+                  fontSize: '13px', 
+                  padding: '8px 18px',
+                  ...(prediction !== null ? { backgroundColor: '#16a34a', borderColor: '#16a34a', cursor: 'default', opacity: 1 } : {})
+                }}
               >
                 {predicting ? (
                   <>
                     <span className="predict-spinner"></span>
                     Memproses...
                   </>
+                ) : prediction !== null ? (
+                  <>✅ Sudah Terprediksi</>
                 ) : (
                   <>🤖 Jalankan Prediksi AI</>
                 )}

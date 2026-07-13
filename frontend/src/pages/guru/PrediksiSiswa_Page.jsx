@@ -136,10 +136,11 @@ const PrediksiSiswa_Page = () => {
         ]);
 
         if (studentsRes.data.success) {
+          const sessionPreds = JSON.parse(sessionStorage.getItem('session_predictions') || '{}');
           const mapped = studentsRes.data.data.map(s => {
             const history = s.riwayatPrediksi || [];
-            // Jangan load dari riwayat agar user harus menekan tombol prediksi
-            const latestPred = null;
+            // Gunakan sessionStorage agar persist antar halaman tapi reset saat logout
+            const latestPred = sessionPreds[s.student_id] || null;
 
             const score = s.exam_score || 0;
 
@@ -182,6 +183,10 @@ const PrediksiSiswa_Page = () => {
       setPredicting(true);
       const res = await api.post('/predict', { student_id: studentId });
       if (res.data.success) {
+        const sessionPreds = JSON.parse(sessionStorage.getItem('session_predictions') || '{}');
+        sessionPreds[studentId] = res.data.data;
+        sessionStorage.setItem('session_predictions', JSON.stringify(sessionPreds));
+
         setStudents(prev => prev.map(s => {
           if (s.student_id === studentId) {
             return {
@@ -210,6 +215,14 @@ const PrediksiSiswa_Page = () => {
       const res = await api.post('/predict/batch');
       if (res.data.success) {
         const results = res.data.data;
+        const sessionPreds = JSON.parse(sessionStorage.getItem('session_predictions') || '{}');
+        results.forEach(pred => {
+          if (pred && pred.student_id) {
+            sessionPreds[pred.student_id] = pred;
+          }
+        });
+        sessionStorage.setItem('session_predictions', JSON.stringify(sessionPreds));
+
         setStudents(prev => prev.map(s => {
           const pred = results.find(r => r.student_id === s.student_id);
           if (pred) {
@@ -239,6 +252,7 @@ const PrediksiSiswa_Page = () => {
   const totalSiswa = students.length;
   const siapCount = students.filter(s => s.status === 'Siap').length;
   const berisikoCount = students.filter(s => s.status === 'Berisiko').length;
+  const isAllPredicted = students.length > 0 && students.every(s => s.prediction !== null);
 
   const getStatusClass = (status) => {
     switch (status) {
@@ -261,6 +275,7 @@ const PrediksiSiswa_Page = () => {
     if (id === 'keluar') {
       localStorage.removeItem('token');
       localStorage.removeItem('role');
+      sessionStorage.removeItem('session_predictions');
       navigate('/', { replace: true });
     }
   };
@@ -316,17 +331,18 @@ const PrediksiSiswa_Page = () => {
             <button
               className="predict-batch-btn"
               onClick={handlePredictBatch}
-              disabled={batchPredicting || loading}
+              disabled={batchPredicting || loading || isAllPredicted}
+              style={isAllPredicted ? { backgroundColor: '#16a34a', borderColor: '#16a34a', cursor: 'default', opacity: 1 } : {}}
             >
               {batchPredicting ? (
                 <>
                   <span className="predict-spinner"></span>
                   Memproses AI...
                 </>
+              ) : isAllPredicted ? (
+                <>✅ Semua Terprediksi</>
               ) : (
-                <>
-                  ✨ Prediksi Semua Siswa
-                </>
+                <>✨ Prediksi Semua Siswa</>
               )}
             </button>
           </div>
@@ -385,11 +401,14 @@ const PrediksiSiswa_Page = () => {
                             <button
                               className="predict-btn"
                               onClick={() => handlePredict(student.student_id)}
-                              disabled={predicting && predictingId === student.student_id}
-                              title="Jalankan Prediksi AI"
+                              disabled={(predicting && predictingId === student.student_id) || student.prediction !== null}
+                              title={student.prediction !== null ? "Sudah Terprediksi" : "Jalankan Prediksi AI"}
+                              style={student.prediction !== null ? { backgroundColor: '#f8fafc', color: '#16a34a', borderColor: '#e2e8f0', cursor: 'default' } : {}}
                             >
                               {predicting && predictingId === student.student_id ? (
                                 <span className="predict-spinner-sm"></span>
+                              ) : student.prediction !== null ? (
+                                '✅'
                               ) : (
                                 '🤖'
                               )}
