@@ -72,7 +72,7 @@ const predictStudent = async (req, res) => {
         prediksi_nilai: Math.min(100, parseFloat((score * 1.05).toFixed(2))),
         tren:           score > 80 ? 'naik' : score >= 65 ? 'stabil' : 'turun',
         level_risiko:   score < 60 ? 'tinggi' : score < 75 ? 'sedang' : 'rendah',
-        confidence:     parseFloat((0.80 + ((score % 15) / 100)).toFixed(2))
+        confidence:     Math.min(0.98, parseFloat((0.75 + Math.abs(score - 60) / 200).toFixed(2)))
       };
     }
 
@@ -195,7 +195,7 @@ const predictBatch = async (req, res) => {
           prediksi_nilai: Math.min(100, parseFloat((score * 1.05).toFixed(2))),
           tren:           score > 80 ? 'naik' : score >= 65 ? 'stabil' : 'turun',
           level_risiko:   score < 60 ? 'tinggi' : score < 75 ? 'sedang' : 'rendah',
-          confidence:     parseFloat((0.80 + ((score % 15) / 100)).toFixed(2))
+          confidence:     Math.min(0.98, parseFloat((0.75 + Math.abs(score - 60) / 200).toFixed(2)))
         };
 
         if (isUsingDatabase()) {
