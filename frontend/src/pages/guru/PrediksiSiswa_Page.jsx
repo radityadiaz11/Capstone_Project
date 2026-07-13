@@ -395,7 +395,7 @@ const PrediksiSiswa_Page = () => {
                             </button>
                             <button
                               className="detail-btn"
-                              onClick={() => navigate(`/detail-siswa?id=${student.student_id}`)}
+                              onClick={() => navigate(`/guru/detail-siswa?id=${student.student_id}`)}
                             >
                               Detail
                             </button>

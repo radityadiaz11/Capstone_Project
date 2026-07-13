@@ -136,7 +136,7 @@ export default function Notifikasi_Page() {
       message: 'Farhan Hidayat mengalami penurunan nilai dari 65.3 → 58.1. Periksa kondisi siswa.',
       meta: '1 jam yang lalu · Klik untuk lihat detail',
       icon: '📉',
-      link: '/detail-siswa'
+      link: '/guru/detail-siswa'
     },
     {
       id: 3,

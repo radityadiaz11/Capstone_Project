@@ -109,10 +109,10 @@ function Topbar({ title = 'Detail Siswa', onBack, profile = {} }) {
       </div>
       <div className="db-topbar-right" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <div className="db-profile-info">
-                    <span className="db-profile-name">{profile.nama || 'Ibu Sari'}</span>
-                    <span className="db-profile-role">Wali Kelas {profile.mengampu_kelas || 'XII IPA 1'}</span>
-                </div>
-                <div className="db-avatar">{profile.nama ? profile.nama.substring(0, 2).toUpperCase() : 'SR'}</div>
+          <span className="db-profile-name">{profile.nama || 'Ibu Sari'}</span>
+          <span className="db-profile-role">Wali Kelas {profile.mengampu_kelas || 'XII IPA 1'}</span>
+        </div>
+        <div className="db-avatar">{profile.nama ? profile.nama.substring(0, 2).toUpperCase() : 'SR'}</div>
       </div>
     </header>
   );
@@ -126,7 +126,7 @@ const DetailSiswa_Page = () => {
       try {
         const res = await api.get('/users/profile');
         if (res.data.success) setProfile(res.data.data);
-      } catch (err) {}
+      } catch (err) { }
     };
     fetchProfile();
   }, []);
@@ -228,7 +228,7 @@ const DetailSiswa_Page = () => {
       <div className="db-shell">
         <Sidebar active="prediksi" onNavigate={handleNavigate} />
         <div className="db-main">
-          <Topbar profile={profile} title="Detail Siswa" onBack={() => navigate('/prediksi-siswa')} />
+          <Topbar profile={profile} title="Detail Siswa" onBack={() => navigate('/guru/prediksi-siswa')} />
           <main className="db-content">
             <div className="db-skeleton-block" style={{ height: '120px' }}></div>
             <div className="db-mid-row">
@@ -246,7 +246,7 @@ const DetailSiswa_Page = () => {
       <div className="db-shell">
         <Sidebar active="prediksi" onNavigate={handleNavigate} />
         <div className="db-main">
-          <Topbar profile={profile} title="Detail Siswa" onBack={() => navigate('/prediksi-siswa')} />
+          <Topbar profile={profile} title="Detail Siswa" onBack={() => navigate('/guru/prediksi-siswa')} />
           <main className="db-content">
             <div className="db-empty-state" style={{ minHeight: '300px' }}>
               <span style={{ fontSize: '48px' }}>🔍</span>
@@ -285,7 +285,7 @@ const DetailSiswa_Page = () => {
       {/* Main Area */}
       <div className="db-main">
         {/* Unified Topbar with Back Navigation */}
-        <Topbar profile={profile} title="Detail Siswa" onBack={() => navigate('/prediksi-siswa')} />
+        <Topbar profile={profile} title="Detail Siswa" onBack={() => navigate('/guru/prediksi-siswa')} />
 
         {/* Content Area */}
         <main className="db-content detail-content-wrapper">

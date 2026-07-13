@@ -73,9 +73,13 @@ const getStudentById = async (req, res) => {
     let student;
 
     if (isUsingDatabase()) {
+      const Prediksi = require('../models/Prediksi');
       student = await Student.findOne({
         where:   { student_id: req.params.id },
-        include: [{ model: EarlyWarning, as: 'warnings' }]
+        include: [
+          { model: EarlyWarning, as: 'warnings' },
+          { model: Prediksi, as: 'riwayatPrediksi' }
+        ]
       });
     } else {
       student = getInMemoryStudents()
@@ -101,22 +105,7 @@ const getStudentById = async (req, res) => {
 // ================================================
 const createStudent = async (req, res) => {
   try {
-    const payload = { ...req.body };
-    const scores = ['math_score', 'indo_score', 'eng_score', 'bio_score', 'chem_score', 'phy_score'];
-    let totalScore = 0;
-    let count = 0;
-    scores.forEach(key => {
-      const val = parseFloat(payload[key]);
-      if (!isNaN(val)) {
-        totalScore += val;
-        count++;
-      }
-    });
-    if (count > 0 && (payload.exam_score === undefined || payload.exam_score === null || payload.exam_score === 0 || payload.exam_score === '')) {
-      payload.exam_score = totalScore / count;
-    }
-
-    const { student_id, age, gender, academic_level, exam_score } = payload;
+    const { student_id, age, gender, academic_level, exam_score } = req.body;
 
     if (!student_id) {
       return res.status(400).json({
@@ -128,7 +117,7 @@ const createStudent = async (req, res) => {
     let student;
 
     if (isUsingDatabase()) {
-      student = await Student.create(payload);
+      student = await Student.create(req.body);
     } else {
       const list = getInMemoryStudents();
       const exists = list.find(s => String(s.student_id) === String(student_id));
@@ -141,7 +130,7 @@ const createStudent = async (req, res) => {
       student = {
         id:     list.length + 1,
         status: 'aktif',
-        ...payload
+        ...req.body
       };
       setInMemoryStudents([...list, student]);
     }
@@ -177,22 +166,7 @@ const updateStudent = async (req, res) => {
           message: 'Siswa tidak ditemukan'
         });
       }
-      const payload = { ...req.body };
-      const scores = ['math_score', 'indo_score', 'eng_score', 'bio_score', 'chem_score', 'phy_score'];
-      let totalScore = 0;
-      let count = 0;
-      scores.forEach(key => {
-        const val = parseFloat(payload[key] !== undefined ? payload[key] : student[key]);
-        if (!isNaN(val)) {
-          totalScore += val;
-          count++;
-        }
-      });
-      if (count > 0 && (payload.exam_score === undefined || payload.exam_score === null || payload.exam_score === 0 || payload.exam_score === '')) {
-        payload.exam_score = totalScore / count;
-      }
-      
-      await student.update(payload);
+      await student.update(req.body);
     } else {
       const list  = getInMemoryStudents();
       const index = list.findIndex(
