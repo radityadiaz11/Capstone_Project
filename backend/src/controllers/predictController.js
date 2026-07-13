@@ -63,10 +63,11 @@ const predictStudent = async (req, res) => {
 
       hasilPrediksi = aiResponse.data;
 
-    } catch {
+    } catch (aiError) {
       // Fallback: simulasi jika model AI belum tersedia
+      console.error('[AI Predict Error]:', aiError.message);
       isSimulated = true;
-      const score = student.exam_score;
+      const score = parseFloat(student.exam_score) || 0;
       hasilPrediksi = {
         prediksi_nilai: parseFloat((score * 1.05).toFixed(2)),
         tren:           score > 30 ? 'naik' : score > 15 ? 'stabil' : 'turun',
@@ -78,14 +79,19 @@ const predictStudent = async (req, res) => {
     // Simpan hasil ke database jika tersedia
     let prediksi = hasilPrediksi;
     if (isUsingDatabase()) {
-      prediksi = await Prediksi.create({
-        student_id:     student.id,
-        prediksi_nilai: hasilPrediksi.prediksi_nilai,
-        tren:           hasilPrediksi.tren,
-        level_risiko:   hasilPrediksi.level_risiko,
-        confidence:     hasilPrediksi.confidence,
-        is_simulated:   isSimulated
-      });
+      try {
+        prediksi = await Prediksi.create({
+          student_id:     student.id,
+          prediksi_nilai: hasilPrediksi.prediksi_nilai || 0,
+          tren:           hasilPrediksi.tren || 'stabil',
+          level_risiko:   hasilPrediksi.level_risiko || 'rendah',
+          confidence:     hasilPrediksi.confidence || 0,
+          is_simulated:   isSimulated
+        });
+      } catch (dbError) {
+        console.error('[DB Prediksi Create Error]:', dbError.message);
+        // Continue even if saving to DB fails
+      }
     }
 
     res.json({
@@ -100,6 +106,7 @@ const predictStudent = async (req, res) => {
     });
 
   } catch (error) {
+    console.error('[Predict API Error]:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
@@ -177,12 +184,13 @@ const predictBatch = async (req, res) => {
           });
         }
       }
-    } catch {
+    } catch (aiError) {
       // Fallback: simulasi untuk semua siswa
+      console.error('[AI Batch Error]:', aiError.message);
       aiAvailable = false;
 
       for (const student of students) {
-        const score = student.exam_score || 0;
+        const score = parseFloat(student.exam_score) || 0;
         const pred = {
           prediksi_nilai: parseFloat((score * 1.05).toFixed(2)),
           tren:           score > 30 ? 'naik' : score > 15 ? 'stabil' : 'turun',
@@ -191,14 +199,18 @@ const predictBatch = async (req, res) => {
         };
 
         if (isUsingDatabase()) {
-          await Prediksi.create({
-            student_id:     student.id,
-            prediksi_nilai: pred.prediksi_nilai,
-            tren:           pred.tren,
-            level_risiko:   pred.level_risiko,
-            confidence:     pred.confidence,
-            is_simulated:   true
-          });
+          try {
+            await Prediksi.create({
+              student_id:     student.id,
+              prediksi_nilai: pred.prediksi_nilai,
+              tren:           pred.tren,
+              level_risiko:   pred.level_risiko,
+              confidence:     pred.confidence,
+              is_simulated:   true
+            });
+          } catch (dbErr) {
+            console.error(`[DB Prediksi Batch Error] (Student ID: ${student.id}):`, dbErr.message);
+          }
         }
 
         results.push({
@@ -329,9 +341,10 @@ const getNarasi = async (req, res) => {
           is_ai: true
         }
       });
-    } catch {
+    } catch (aiError) {
       // Fallback narasi sederhana
-      const score = student.exam_score || 0;
+      console.error('[AI Narasi Error]:', aiError.message);
+      const score = parseFloat(student.exam_score) || 0;
       let narasi = '';
 
       if (role === 'guru') {
@@ -362,6 +375,7 @@ const getNarasi = async (req, res) => {
       });
     }
   } catch (error) {
+    console.error('[Narasi API Error]:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
