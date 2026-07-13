@@ -132,7 +132,7 @@ const PrediksiSiswa_Page = () => {
         setLoading(true);
         const [studentsRes, aiRes] = await Promise.all([
           api.get('/students'),
-          api.get('/predict/status').catch(() => ({ data: { success: false } }))
+          api.get('/predict/model-status').catch(() => ({ data: { success: false } }))
         ]);
 
         if (studentsRes.data.success) {
