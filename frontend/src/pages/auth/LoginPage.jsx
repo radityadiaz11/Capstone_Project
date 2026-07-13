@@ -11,15 +11,15 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const role = localStorage.getItem('role');
-            if (role === 'guru') navigate('/guru/dashboard');
-            else if (role === 'ortu') navigate('/ortu/dashboard');
-            else if (role === 'admin') navigate('/admin/dashboard');
-        }
-    }, [navigate]);
+    // useEffect(() => {
+    //     const token = localStorage.getItem('token');
+    //     if (token) {
+    //         const role = localStorage.getItem('role');
+    //         if (role === 'guru') navigate('/guru/dashboard');
+    //         else if (role === 'ortu') navigate('/ortu/dashboard');
+    //         else if (role === 'admin') navigate('/admin/dashboard');
+    //     }
+    // }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,7 +46,8 @@ export default function LoginPage() {
         }
 
         try {
-            const response = await api.post('/auth/login', { email, password });
+            const trimmedEmail = email.trim();
+            const response = await api.post('/auth/login', { email: trimmedEmail, password });
 
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('role', response.data.user.role);

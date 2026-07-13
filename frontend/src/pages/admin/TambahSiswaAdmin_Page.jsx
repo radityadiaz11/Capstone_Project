@@ -64,9 +64,20 @@ function TambahSiswaAdmin_Page() {
     const handleSaveStudent = async () => {
         try {
             const payload = { ...formData };
+            let totalScore = 0;
+            let validSubjects = 0;
+
             ['math_score', 'indo_score', 'eng_score', 'bio_score', 'chem_score', 'phy_score'].forEach(key => {
-                if (payload[key] === '') payload[key] = null;
+                const val = payload[key];
+                if (val === '' || val === null || val === undefined) {
+                    payload[key] = null;
+                } else {
+                    totalScore += parseFloat(val);
+                    validSubjects++;
+                }
             });
+
+            payload.exam_score = validSubjects > 0 ? (totalScore / validSubjects) : 0;
 
             if (isEditMode) {
                 await api.put(`/students/${payload.student_id}`, payload);
