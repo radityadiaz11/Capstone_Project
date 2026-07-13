@@ -176,7 +176,7 @@ const DetailSiswa_Page = () => {
     if (!studentId) return;
     try {
       setPredicting(true);
-      const res = await api.post('/predict', { student_id: parseInt(studentId) });
+      const res = await api.post('/predict', { student_id: studentId });
       if (res.data.success) {
         setPrediction(res.data.data);
       }
@@ -193,7 +193,7 @@ const DetailSiswa_Page = () => {
     try {
       setNarasiLoading(true);
       const res = await api.post('/predict/narasi', {
-        student_id: parseInt(studentId),
+        student_id: studentId,
         role: 'guru'
       });
       if (res.data.success) {
