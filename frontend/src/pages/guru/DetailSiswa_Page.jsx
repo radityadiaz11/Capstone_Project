@@ -276,13 +276,9 @@ const DetailSiswa_Page = () => {
     { name: 'Bahasa Inggris', score: student.eng_score || 0 },
   ].filter(s => s.score > 0);
 
-  // Calculate average attendance or use mock if undefined/0
-  const rawAvgAttendance = (
-    ((student.attendance_w1 || 0) + (student.attendance_w2 || 0) + (student.attendance_w3 || 0) + (student.attendance_w4 || 0)) / 4
-  );
-  const avgAttendance = rawAvgAttendance > 0 ? rawAvgAttendance.toFixed(0) : '92'; // fallback 92%
-  const studyHours = student.study_hours || 14;
-  const ekstraStatus = student.extracurricular_active !== undefined ? (student.extracurricular_active ? '✅ Aktif' : '❌ Tidak') : '✅ Aktif';
+  // Hitung Produktifitas berdasarkan target 120 hari masuk sekolah
+  const totalHadir = (student.attendance_w1 || 0) + (student.attendance_w2 || 0) + (student.attendance_w3 || 0) + (student.attendance_w4 || 0);
+  let produktifitas = totalHadir > 0 ? Math.min(Math.round((totalHadir / 120) * 100), 100) : 0;
 
   return (
     <div className="db-shell">
@@ -427,21 +423,10 @@ const DetailSiswa_Page = () => {
                     <span className="ds-val" style={{ fontWeight: 600 }}>{examScore.toFixed(0)}</span>
                   </div>
                   <div className="detail-stat-row">
-                    <span className="ds-label">Kehadiran</span>
-                    <span className="ds-val" style={{ color: parseInt(avgAttendance) < 75 ? '#ef4444' : '#16a34a', fontWeight: 600 }}>{avgAttendance}%</span>
+                    <span className="ds-label">Produktifitas</span>
+                    <span className="ds-val" style={{ color: produktifitas < 75 ? '#ef4444' : '#16a34a', fontWeight: 600 }}>{produktifitas}%</span>
                   </div>
-                  <div className="detail-stat-row">
-                    <span className="ds-label">Jam Belajar</span>
-                    <span className="ds-val">{studyHours} jam/minggu</span>
-                  </div>
-                  <div className="detail-stat-row">
-                    <span className="ds-label">Ekstrakurikuler</span>
-                    <span className="ds-val">{ekstraStatus}</span>
-                  </div>
-                  <div className="detail-stat-row">
-                    <span className="ds-label">Produktivitas</span>
-                    <span className="ds-val">{student.productivity_score || '0'}</span>
-                  </div>
+
                   <div className="detail-stat-row" style={{ borderBottom: 'none' }}>
                     <span className="ds-label">Mental Health</span>
                     <span className="ds-val" style={{ color: (student.mental_health_score || 100) < 60 ? '#ef4444' : '#16a34a', fontWeight: 600 }}>{student.mental_health_score || '100'}</span>
