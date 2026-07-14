@@ -18,7 +18,6 @@ const navMenu = [
   {
     group: 'LAPORAN',
     items: [
-      { id: 'statistik', label: 'Statistik SNBP', icon: '⊟' },
       { id: 'ekspor', label: 'Ekspor Data', icon: '↓' },
     ],
   },
@@ -217,7 +216,6 @@ const DetailSiswa_Page = () => {
     if (id === 'nilai') navigate('/guru/data-nilai');
     if (id === 'monitoring') navigate('/guru/monitoring-kelas');
     if (id === 'tambah-siswa') navigate('/guru/tambah-siswa');
-    if (id === 'statistik') navigate('/guru/statistik-snbp');
     if (id === 'ekspor') navigate('/guru/ekspor-data');
     if (id === 'notifikasi-settings') navigate('/guru/notifikasi');
     if (id === 'pengaturan') navigate('/guru/pengaturan');

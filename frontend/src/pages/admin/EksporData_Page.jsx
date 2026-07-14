@@ -235,11 +235,6 @@ function EksporData_Page() {
 
                         <button
                             className="dbs-nav-item"
-                            onClick={() => { navigate('/admin/statistik'); setIsMobileMenuOpen(false); }}
-                        >
-                            <span className="dbs-nav-icon">⊟</span>
-                            <span>Statistik SNBP</span>
-                        </button>
 
                         <button
                             className="dbs-nav-item active"

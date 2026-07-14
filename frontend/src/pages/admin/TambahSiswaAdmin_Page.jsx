@@ -151,10 +151,6 @@ function TambahSiswaAdmin_Page() {
                         </button>
 
                         <span className="dbs-nav-label" style={{ marginTop: '16px' }}>Laporan</span>
-                        <button className="dbs-nav-item" onClick={() => { navigate('/admin/statistik'); setIsMobileMenuOpen(false); }}>
-                            <span className="dbs-nav-icon">⊟</span>
-                            <span>Statistik SNBP</span>
-                        </button>
                         <button className="dbs-nav-item" onClick={() => { navigate('/admin/ekspor'); setIsMobileMenuOpen(false); }}>
                             <span className="dbs-nav-icon">↓</span>
                             <span>Ekspor Data</span>
