@@ -429,7 +429,9 @@ const DetailSiswa_Page = () => {
 
                   <div className="detail-stat-row" style={{ borderBottom: 'none' }}>
                     <span className="ds-label">Mental Health</span>
-                    <span className="ds-val" style={{ color: (student.mental_health_score || 100) < 60 ? '#ef4444' : '#16a34a', fontWeight: 600 }}>{student.mental_health_score || '100'}</span>
+                    <span className="ds-val" style={{ color: (student.mental_health_score || 100) < 60 ? '#ef4444' : (student.mental_health_score == 60 ? '#f59e0b' : '#16a34a'), fontWeight: 600 }}>
+                      {student.mental_health_score == 100 ? 'Tinggi' : student.mental_health_score == 60 ? 'Sedang' : student.mental_health_score == 30 ? 'Rendah' : 'Tinggi'}
+                    </span>
                   </div>
                 </div>
               </div>

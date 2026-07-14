@@ -272,7 +272,11 @@ const TambahSiswaGuru_Page = () => {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <label style={{ fontSize: '12px', fontWeight: 600, color: '#64748b' }}>Mental Health</label>
-                <input type="number" value={formData.mental_health_score || ''} onChange={e => setFormData({ ...formData, mental_health_score: e.target.value })} style={{ padding: '8px', border: '1px solid #cbd5e1', borderRadius: '4px' }} />
+                <select value={formData.mental_health_score || '100'} onChange={e => setFormData({ ...formData, mental_health_score: e.target.value })} style={{ padding: '8px', border: '1px solid #cbd5e1', borderRadius: '4px', background: '#fff' }}>
+                  <option value="100">Tinggi</option>
+                  <option value="60">Sedang</option>
+                  <option value="30">Rendah</option>
+                </select>
               </div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '20px' }}>
