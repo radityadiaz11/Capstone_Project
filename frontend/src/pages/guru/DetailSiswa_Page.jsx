@@ -470,37 +470,6 @@ const DetailSiswa_Page = () => {
                     <span>{narasiLoading ? 'Memuat narasi...' : (narasi ? 'Perbarui Rekomendasi' : 'Minta Rekomendasi AI')}</span>
                     <span className="tab-arrow">✨</span>
                   </button>
-                  <button 
-                    className="teacher-action-btn" 
-                    type="button"
-                    onClick={() => {
-                      const note = prompt(`Masukkan jadwal/catatan bimbingan untuk ${student.nama}:`);
-                      if (note) alert(`Bimbingan berhasil dicatat untuk ${student.nama}!`);
-                    }}
-                  >
-                    <span>Catat bimbingan</span>
-                    <span className="tab-arrow">↗</span>
-                  </button>
-                  <button 
-                    className="teacher-action-btn" 
-                    type="button"
-                    onClick={() => {
-                      const existing = JSON.parse(localStorage.getItem('ortu_notifications') || '[]');
-                      const newNotif = {
-                        id: Date.now(),
-                        type: 'success',
-                        message: `Pembaruan performa: Guru wali kelas baru saja mengirimkan catatan terkait perkembangan ${student.nama}.`,
-                        time: 'Baru saja',
-                        icon: '📢',
-                        bold: true
-                      };
-                      localStorage.setItem('ortu_notifications', JSON.stringify([newNotif, ...existing]));
-                      alert(`Notifikasi berhasil dikirim ke orang tua ${student.nama}!`);
-                    }}
-                  >
-                    <span>Kirim notif orang tua</span>
-                    <span className="tab-arrow">↗</span>
-                  </button>
                 </div>
               </div>
 

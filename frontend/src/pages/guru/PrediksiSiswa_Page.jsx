@@ -356,7 +356,7 @@ const PrediksiSiswa_Page = () => {
                   <tr>
                     <th>Nama siswa</th>
                     <th>Minat prodi</th>
-                    <th>Exam Score</th>
+                    <th>Rata-Rata Nilai</th>
                     <th>Prediksi AI</th>
                     <th>Status</th>
                     <th></th>
