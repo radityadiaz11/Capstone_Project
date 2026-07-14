@@ -276,8 +276,8 @@ const DetailSiswa_Page = () => {
     { name: 'Bahasa Inggris', score: student.eng_score || 0 },
   ].filter(s => s.score > 0);
 
-  // Hitung Produktifitas berdasarkan target 120 hari masuk sekolah
-  const totalHadir = (student.attendance_w1 || 0) + (student.attendance_w2 || 0) + (student.attendance_w3 || 0) + (student.attendance_w4 || 0);
+  // Hitung Produktifitas berdasarkan target 120 hari masuk sekolah (diambil dari input Produktivitas)
+  const totalHadir = student.productivity_score || 0;
   let produktifitas = totalHadir > 0 ? Math.min(Math.round((totalHadir / 120) * 100), 100) : 0;
 
   return (
