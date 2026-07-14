@@ -60,6 +60,14 @@ function NotifikasiOrtu_Page() {
     },
   ];
 
+  const [customNotifs, setCustomNotifs] = useState([]);
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem('ortu_notifications') || '[]');
+    setCustomNotifs(stored);
+  }, []);
+
+  const allNotifications = [...customNotifs, ...notifications];
+
   return (
     <div className="no-container">
 
