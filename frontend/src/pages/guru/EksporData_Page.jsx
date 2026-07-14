@@ -124,7 +124,16 @@ function EksporData_Page() {
                 if (res.data && res.data.data) {
                     studentsData = res.data.data;
                     if (profile.mengampu_kelas) {
-                        studentsData = studentsData.filter(s => s.kelas === profile.mengampu_kelas);
+                        const kelasList = [
+                            'XII IPA 1', 'XII IPA 2', 'XII IPA 3', 'XII IPA 4',
+                            'XII IPS 1', 'XII IPS 2', 'XII IPS 3', 'XII IPS 4',
+                            'XII Bahasa 1', 'XII Bahasa 2', 'XII Bahasa 3', 'XII Bahasa 4'
+                        ];
+                        studentsData = studentsData.filter(s => {
+                            const studentId = parseInt(s.id || s.student_id || 0, 10);
+                            const kelasName = kelasList[studentId % 12];
+                            return kelasName === profile.mengampu_kelas;
+                        });
                     }
                 }
 
@@ -313,17 +322,20 @@ function EksporData_Page() {
                         </tr>
                     </thead>
                     <tbody>
-                        {statsData.length > 0 ? statsData.filter(k => k.kelas === profile.mengampu_kelas).map((k, i) => (
-                            <tr key={k.kelas}>
-                                <td>{k.kelas}</td>
-                                <td>{k.wali || `Wali Kelas ${i + 1}`}</td>
-                                <td>{k.aman} Siswa</td>
-                                <td>{k.total - k.aman} Siswa</td>
-                                <td>{k.pct || 0}%</td>
-                            </tr>
-                        )) : (
-                            <tr><td colSpan="5" style={{ textAlign: 'center' }}>Data tidak tersedia</td></tr>
-                        )}
+                        {(() => {
+                            if (statsData.length === 0) return <tr><td colSpan="5" style={{ textAlign: 'center' }}>Data tidak tersedia</td></tr>;
+                            const filtered = statsData.filter(k => k.kelas === profile.mengampu_kelas);
+                            if (filtered.length === 0) return <tr><td colSpan="5" style={{ textAlign: 'center' }}>Data kelas {profile.mengampu_kelas} tidak tersedia</td></tr>;
+                            return filtered.map((k, i) => (
+                                <tr key={k.kelas}>
+                                    <td>{k.kelas}</td>
+                                    <td>{k.wali || profile.nama || `Wali Kelas`}</td>
+                                    <td>{k.aman} Siswa</td>
+                                    <td>{k.total - k.aman} Siswa</td>
+                                    <td>{k.pct || 0}%</td>
+                                </tr>
+                            ));
+                        })()}
                     </tbody>
                 </table>
             </div>
