@@ -13,7 +13,6 @@ import PrediksiSiswa_Page from './pages/guru/PrediksiSiswa_Page';
 import DetailSiswa_Page from './pages/guru/DetailSiswa_Page';
 import DataNilai_Page from './pages/guru/DataNilai_Page';
 import MonitoringKelas_Page from './pages/guru/MonitoringKelas_Page';
-import StatistikSNBP_Page from './pages/guru/StatistikSNBP_Page';
 import EksporData_Page from './pages/guru/EksporData_Page';
 import Notifikasi_Page from './pages/guru/Notifikasi_Page';
 import Pengaturan_Page from './pages/guru/Pengaturan_Page';
@@ -24,7 +23,6 @@ import NilaiRapor_Page from './pages/ortu/NilaiRapor_Page';
 import PrediksiSnbp_Page from './pages/ortu/PrediksiSnbp_Page';
 import NotifikasiOrtu_Page from './pages/ortu/NotifikasiOrtu_Page';
 import PengaturanOrtu_Page from './pages/ortu/PengaturanOrtu_Page';
-import StatistikAdmin_Page from './pages/admin/StatistikSNBP_Page';
 
 function App() {
   return (
@@ -38,7 +36,6 @@ function App() {
       <Route path="/guru/detail-siswa" element={<ProtectedRoute requiredRoles={['guru']}><DetailSiswa_Page /></ProtectedRoute>} />
       <Route path="/guru/data-nilai" element={<ProtectedRoute requiredRoles={['guru']}><DataNilai_Page /></ProtectedRoute>} />
       <Route path="/guru/monitoring-kelas" element={<ProtectedRoute requiredRoles={['guru']}><MonitoringKelas_Page /></ProtectedRoute>} />
-      <Route path="/guru/statistik-snbp" element={<ProtectedRoute requiredRoles={['guru']}><StatistikSNBP_Page /></ProtectedRoute>} />
       <Route path="/guru/ekspor-data" element={<ProtectedRoute requiredRoles={['guru']}><EksporData_Page /></ProtectedRoute>} />
       <Route path="/guru/notifikasi" element={<ProtectedRoute requiredRoles={['guru']}><Notifikasi_Page /></ProtectedRoute>} />
       <Route path="/guru/pengaturan" element={<ProtectedRoute requiredRoles={['guru']}><Pengaturan_Page /></ProtectedRoute>} />
@@ -59,7 +56,6 @@ function App() {
       <Route path="/admin/pengaturan" element={<ProtectedRoute requiredRoles={['admin']}><PengaturanAdmin_Page /></ProtectedRoute>} />
       <Route path="/admin/tambah-siswa" element={<ProtectedRoute requiredRoles={['admin']}><TambahSiswaAdmin_Page /></ProtectedRoute>} />
       <Route path="/admin/tambah-role" element={<ProtectedRoute requiredRoles={['admin']}><TambahRoleAdmin_Page /></ProtectedRoute>} />
-      <Route path="/admin/statistik" element={<ProtectedRoute requiredRoles={['admin']}><StatistikAdmin_Page /></ProtectedRoute>} />
     </Routes>
   );
 }
