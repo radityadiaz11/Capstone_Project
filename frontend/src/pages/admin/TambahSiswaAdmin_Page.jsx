@@ -33,6 +33,7 @@ function TambahSiswaAdmin_Page() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({});
     const [isEditMode, setIsEditMode] = useState(false);
+    const [originalStudentId, setOriginalStudentId] = useState(null);
 
     useEffect(() => {
         fetchData();
@@ -54,9 +55,11 @@ function TambahSiswaAdmin_Page() {
         if (student) {
             setIsEditMode(true);
             setFormData(student);
+            setOriginalStudentId(student.student_id);
         } else {
             setIsEditMode(false);
             setFormData({ nama: '', student_id: '', prodi: '', math_score: '', indo_score: '', eng_score: '', bio_score: '', chem_score: '', phy_score: '' });
+            setOriginalStudentId(null);
         }
         setIsModalOpen(true);
     };
@@ -80,7 +83,7 @@ function TambahSiswaAdmin_Page() {
             payload.exam_score = validSubjects > 0 ? (totalScore / validSubjects) : 0;
 
             if (isEditMode) {
-                await api.put(`/students/${payload.student_id}`, payload);
+                await api.put(`/students/${originalStudentId}`, payload);
             } else {
                 await api.post('/students', payload);
             }
@@ -266,7 +269,7 @@ function TambahSiswaAdmin_Page() {
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                 <label style={{ fontSize: '12px', fontWeight: 600, color: '#64748b' }}>NISN</label>
-                                <input type="text" value={formData.student_id || ''} onChange={e => setFormData({ ...formData, student_id: e.target.value })} disabled={isEditMode} style={{ padding: '8px', border: '1px solid #cbd5e1', borderRadius: '4px' }} />
+                                <input type="text" value={formData.student_id || ''} onChange={e => setFormData({ ...formData, student_id: e.target.value })} style={{ padding: '8px', border: '1px solid #cbd5e1', borderRadius: '4px' }} />
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                 <label style={{ fontSize: '12px', fontWeight: 600, color: '#64748b' }}>Program Studi Tujuan</label>
