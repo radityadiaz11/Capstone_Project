@@ -234,9 +234,6 @@ function EksporData_Page() {
                         <span className="dbs-nav-label" style={{ marginTop: '16px' }}>Laporan</span>
 
                         <button
-                            className="dbs-nav-item"
-
-                        <button
                             className="dbs-nav-item active"
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
