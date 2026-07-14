@@ -111,7 +111,7 @@ const TambahSiswaGuru_Page = () => {
       setOriginalStudentId(student.student_id);
     } else {
       setIsEditMode(false);
-      setFormData({ nama: '', student_id: '', prodi: '', math_score: '', indo_score: '', eng_score: '', bio_score: '', chem_score: '', phy_score: '' });
+      setFormData({ nama: '', student_id: '', prodi: '', math_score: '', indo_score: '', eng_score: '', bio_score: '', chem_score: '', phy_score: '', productivity_score: '', mental_health_score: '' });
       setOriginalStudentId(null);
     }
     setIsModalOpen(true);
@@ -267,6 +267,14 @@ const TambahSiswaGuru_Page = () => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <label style={{ fontSize: '12px', fontWeight: 600, color: '#64748b' }}>Fisika</label>
                 <input type="number" value={formData.phy_score || ''} onChange={e => setFormData({ ...formData, phy_score: e.target.value })} style={{ padding: '8px', border: '1px solid #cbd5e1', borderRadius: '4px' }} />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <label style={{ fontSize: '12px', fontWeight: 600, color: '#64748b' }}>Produktivitas</label>
+                <input type="number" value={formData.productivity_score || ''} onChange={e => setFormData({ ...formData, productivity_score: e.target.value })} style={{ padding: '8px', border: '1px solid #cbd5e1', borderRadius: '4px' }} />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <label style={{ fontSize: '12px', fontWeight: 600, color: '#64748b' }}>Mental Health</label>
+                <input type="number" value={formData.mental_health_score || ''} onChange={e => setFormData({ ...formData, mental_health_score: e.target.value })} style={{ padding: '8px', border: '1px solid #cbd5e1', borderRadius: '4px' }} />
               </div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '20px' }}>

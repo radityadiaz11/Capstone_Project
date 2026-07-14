@@ -436,9 +436,17 @@ const DetailSiswa_Page = () => {
                     <span className="ds-label">Jam Belajar</span>
                     <span className="ds-val">{studyHours} jam/minggu</span>
                   </div>
-                  <div className="detail-stat-row" style={{ borderBottom: 'none' }}>
+                  <div className="detail-stat-row">
                     <span className="ds-label">Ekstrakurikuler</span>
                     <span className="ds-val">{ekstraStatus}</span>
+                  </div>
+                  <div className="detail-stat-row">
+                    <span className="ds-label">Produktivitas</span>
+                    <span className="ds-val">{student.productivity_score || '0'}</span>
+                  </div>
+                  <div className="detail-stat-row" style={{ borderBottom: 'none' }}>
+                    <span className="ds-label">Mental Health</span>
+                    <span className="ds-val" style={{ color: (student.mental_health_score || 100) < 60 ? '#ef4444' : '#16a34a', fontWeight: 600 }}>{student.mental_health_score || '100'}</span>
                   </div>
                 </div>
               </div>

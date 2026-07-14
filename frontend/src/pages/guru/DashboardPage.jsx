@@ -411,7 +411,7 @@ export default function DashboardPage() {
       id: 'total',
       label: 'Total siswa',
       value: loading ? '—' : String(totalSiswa),
-      sub: 'Data dari database',
+      
       subColor: '#555',
       accent: '#1a56db',
     },
