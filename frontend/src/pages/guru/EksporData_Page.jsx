@@ -123,18 +123,7 @@ function EksporData_Page() {
                 let studentsData = [];
                 if (res.data && res.data.data) {
                     studentsData = res.data.data;
-                    if (profile.mengampu_kelas) {
-                        const kelasList = [
-                            'XII IPA 1', 'XII IPA 2', 'XII IPA 3', 'XII IPA 4',
-                            'XII IPS 1', 'XII IPS 2', 'XII IPS 3', 'XII IPS 4',
-                            'XII Bahasa 1', 'XII Bahasa 2', 'XII Bahasa 3', 'XII Bahasa 4'
-                        ];
-                        studentsData = studentsData.filter(s => {
-                            const studentId = parseInt(s.id || s.student_id || 0, 10);
-                            const kelasName = kelasList[studentId % 12];
-                            return kelasName === profile.mengampu_kelas;
-                        });
-                    }
+                    // Tampilkan semua data siswa tanpa difilter per kelas
                 }
 
                 let tableHtml = `<html xmlns:x="urn:schemas-microsoft-com:office:excel">
@@ -260,7 +249,7 @@ function EksporData_Page() {
                             <div className="db-card ekspor-opt-card">
                                 <div className="ekspor-opt-header">
                                     <div>
-                                        <h3 className="ekspor-opt-title">Data nilai kelas {profile.mengampu_kelas || 'yang diampu'}</h3>
+                                        <h3 className="ekspor-opt-title">Data nilai seluruh kelas</h3>
                                         <p className="ekspor-opt-desc">
                                             Semua nilai siswa per mata pelajaran semester 1–5 dalam format spreadsheet.
                                         </p>
@@ -308,7 +297,7 @@ function EksporData_Page() {
             <div className="print-report-container">
                 <div className="print-report-header">
                     <h2>Laporan Kesiapan SNBP</h2>
-                    <p>Ringkasan status kesiapan dan rekomendasi kelas {profile.mengampu_kelas}</p>
+                    <p>Ringkasan status kesiapan dan rekomendasi seluruh kelas</p>
                     <p style={{ fontSize: '12px', color: '#666' }}>Tanggal Cetak: {new Date().toLocaleDateString('id-ID')}</p>
                 </div>
                 <table className="print-report-table">
@@ -324,12 +313,10 @@ function EksporData_Page() {
                     <tbody>
                         {(() => {
                             if (statsData.length === 0) return <tr><td colSpan="5" style={{ textAlign: 'center' }}>Data tidak tersedia</td></tr>;
-                            const filtered = statsData.filter(k => k.kelas === profile.mengampu_kelas);
-                            if (filtered.length === 0) return <tr><td colSpan="5" style={{ textAlign: 'center' }}>Data kelas {profile.mengampu_kelas} tidak tersedia</td></tr>;
-                            return filtered.map((k, i) => (
+                            return statsData.map((k, i) => (
                                 <tr key={k.kelas}>
                                     <td>{k.kelas}</td>
-                                    <td>{k.wali || profile.nama || `Wali Kelas`}</td>
+                                    <td>{k.wali || `Wali Kelas`}</td>
                                     <td>{k.aman} Siswa</td>
                                     <td>{k.total - k.aman} Siswa</td>
                                     <td>{k.pct || 0}%</td>
