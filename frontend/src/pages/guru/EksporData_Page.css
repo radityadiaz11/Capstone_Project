@@ -208,6 +208,7 @@
   .print-report-table th {
     background-color: #f8f9fa !important;
     -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
     font-weight: bold;
   }
 }
